@@ -1,0 +1,52 @@
+p {
+    font-family: Georgia;
+    color:gray;
+}
+
+.noticia-urgente {
+    background-color: rgb(255, 98, 98);
+}
+
+.evento-importante{
+    font-weight: bold;
+}
+
+#principal{
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(0, 0, 194);
+}
+
+a[href$=".pdf"] {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    color: green;
+}
+
+a[href*="mailto"] {
+    font-style: italic;
+}
+
+p span{
+    color: orange;
+}
+
+.calendario li{
+    padding-left: 20px;
+}
+
+section > h2{
+    border-bottom: 1px solid gray;
+}
+
+h2 + p{
+    margin-top: 0px;
+}
+
+h1 ~ p{
+    font-style: italic;
+}
+
+* {
+    padding-top: 2px;
+}
