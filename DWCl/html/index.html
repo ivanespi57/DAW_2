@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios</title>
+    <style>
+            body { 
+                font-family: sans-serif;
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+                height: 100vh; 
+                background-color: #f0f0f0; 
+            }
+
+            .datos { 
+                text-align: center; 
+                padding: 20px; 
+                border: 1px solid #ccc; 
+                border-radius: 8px; 
+                background-color: #fff; 
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            }
+
+            .resultado { 
+                font-size: 1.5em; 
+                font-weight: bold; 
+                margin-top: 15px; 
+            }
+            
+        </style>
+</head>
+<body>
+    <div class="datos">
+        <h2>Cálculo de salario</h2>
+        <form id="form">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nom" value="">
+            <br>
+            <label for="salActual">Salario Actual: </label>
+            <input type="text" id="salarioAct">
+            <br>
+            <label for="numeroH">Numero de hijos: </label>
+            <input type="text" id="numHijos">
+            <br>
+            <button onclick="proces()">Enviar</button>
+        </form>
+        <hr>
+        <p id="res" class="resultado"></p>
+    </div>
+
+</body>
+</html>
