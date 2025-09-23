@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicios</title>
+    <script src="/DWCl/Scripts/script1.js"></script>
+    <script src="/DWCl/Scripts/script2.js"></script>
     <style>
+
+            *{
+                margin: 10px;
+            }
             body { 
                 font-family: sans-serif;
                 display: flex; 
@@ -14,7 +20,7 @@
                 background-color: #f0f0f0; 
             }
 
-            .datos { 
+            .ejer { 
                 text-align: center; 
                 padding: 20px; 
                 border: 1px solid #ccc; 
@@ -28,27 +34,55 @@
                 font-weight: bold; 
                 margin-top: 15px; 
             }
+
+            table{
+               border-collapse: collapse;
+               width: 100%; 
+            }
+            td{
+                border: 3px solid red;
+            }
             
         </style>
 </head>
 <body>
-    <div class="datos">
+    <div class="ejer">
+        <h1>Ejercicio 1</h1>
         <h2>Cálculo de salario</h2>
-        <form id="form">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nom" value="">
+
+        <form>
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nom">
             <br>
             <label for="salActual">Salario Actual: </label>
-            <input type="text" id="salarioAct">
+            <input type="number" id="salarioAct">
             <br>
             <label for="numeroH">Numero de hijos: </label>
-            <input type="text" id="numHijos">
+            <input type="number" id="numHijos">
             <br>
-            <button onclick="proces()">Enviar</button>
+            <label for="edad">Edad: </label>
+            <input type="number" id="ed">
+            <br>
+            <button type="submit" onclick="procesar(event)">Enviar</button>
         </form>
         <hr>
-        <p id="res" class="resultado"></p>
+        
+        <p id="res" class="resultado">Resultado: </p>
+        <hr>
+
+        <h1>Ejercicio 2</h1>
+
+        <form>
+            <label for="filas">Filas: </label>
+            <input type="number" id="filas" min="1"><br>
+            <label for="filas">Columnas: </label>
+            <input type="number" id="columnas" min="1"><br>
+
+            <button onclick="dibujarTabla(event)">Dibujar tabla</button>
+        </form>
+        <div id="tabla"></div>  
     </div>
 
+    
 </body>
 </html>

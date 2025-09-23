@@ -4,9 +4,21 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 public class Intens_uso{
+    class Municipio {
+        String codigo;
+        String territorio;
+        Integer valor;
+
+        public Municipio(String codigo, String territorio, Integer valor) {
+            this.codigo = codigo;
+            this.territorio = territorio;
+            this.valor = valor;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String line = "";
+        String linea = "";
 
         if(args.length <= 0){
             System.out.println("");
@@ -18,9 +30,13 @@ public class Intens_uso{
                 FileReader fr = new FileReader(f);
                 BufferedReader br = new BufferedReader(fr);
 
-                while ((line = br.readLine()) != null) {                
-                    String[] datos = line.split(";");
+                while ((linea = br.readLine()) != null) {                
                     
+                    
+                    String territorio = datos[3];
+                    String valor = datos[4];
+                    String cod;
+
                     
                 }
                 br.close();

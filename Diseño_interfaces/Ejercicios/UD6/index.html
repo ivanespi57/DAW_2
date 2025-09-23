@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio UD6</title>
+    <title>Ejercicio UD6 Iván Espí</title>
     <style>
         *{
             margin: 10px;
         }
 
-        li:first-child{
+        .li:first-child{
             text-transform: uppercase;
         }
 
-        li:last-child{
+        .li:last-child{
             background-color: lightblue;
         }
 
-        li:nth-child(odd){
+        .li:nth-child(odd){
             background-color: lightgray;
         }
-        li:nth-child(3){
+        .li:nth-child(3){
             font-weight: bold;
         }
         table, th, td {
@@ -60,16 +60,72 @@
         class:active{
             color:yellow
         }
+
+        input:required{
+            border: 1px solid red;
+        }
+
+        .email:valid{
+            background-color: lightgreen;
+        }
+
+        .email:invalid{
+            background-color: rgb(255, 104, 104);
+        }
+
+        .edad:valid{
+            background-color: lightgreen;
+        }
+
+        .edad:invalid{
+            background-color: rgb(255, 104, 104);
+        }
+
+        input:checked + label{
+            font-weight: bold;
+            color: red;
+        }
+
+        p::first-letter{
+            font-size: 40px;
+            color: blue;
+        }
+
+        p::first-line{
+            background-color: lightgray;
+        }
+
+         h2::before {
+            content: "★ ";  
+        }
+        h2::after {
+            content: " ☆";  
+        }
+
+        .li2::marker{
+            color: lightblue;
+        }
+
+        input::placeholder { 
+            color: green; 
+            font-style: italic; 
+        } 
+
+        ::selection{
+            background-color: yellow;
+            color: black;
+        }
+
     </style>
 </head>
 <body>
     <ul>
-        <li> <a href="https://workspace.google.com/intl/es/gmail/">gmail</a> </li>
-        <li> <a href="https://www.google.com/?hl=es&zx=1758201930873&no_sw_cr=1">google</a> </li>
-        <li> <a href="https://github.com/">github</a></li>
-        <li> <a href="https://paiporta.es/">Paiporta</a></li>
-        <li><a href="https://www.gva.es/">gva</a></li>
-        <li><a href="https://aules.edu.gva.es/">aules</a></li>
+        <li class="li"> <a href="https://workspace.google.com/intl/es/gmail/">gmail</a> </li>
+        <li class="li"> <a href="https://www.google.com/?hl=es&zx=1758201930873&no_sw_cr=1">google</a> </li>
+        <li class="li"> <a href="https://github.com/">github</a></li>
+        <li class="li"> <a href="https://paiporta.es/">Paiporta</a></li>
+        <li class="li"><a href="https://www.gva.es/">gva</a></li>
+        <li class="li"><a href="https://aules.edu.gva.es/">aules</a></li>
     </ul>
     <table>
         <tr>
@@ -99,5 +155,39 @@
         <a class="google" href="https://www.google.com/?hl=es&zx=1758201930873&no_sw_cr=1">google</a>
         <a href=""></a>
     </ul>
+
+    <form>
+        <label for="nom">Nombre:</label>
+        <input type="text" required>
+        <br>
+        <label for="Email">Email:</label>
+        <input type="email" class="email">
+        <br>
+        <label for="nom">Edad:</label>
+        <input type="number" min="18" max="99" class="edad"> 
+        <br>
+        <input type="checkbox" >
+        <label for="check">Acepto los términos:</label>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <h2>Título</h2>
+
+    <p> 
+        Comenzó el 20 de mayo de 2001, cuatro meses después de lanzarse la edición original en inglés y<br>
+        tras el anuncio de Jimmy Wales de internacionalizar el proyecto.<br>
+        Es una de las diez Wikipedias con más artículos de entre todos los idiomas. <br>
+    </p>
+
+    <ol>
+        <li class="li2">Comprar agua</li>
+        <li class="li2">Sacar al perro a pasear</li>
+        <li class="li2">Ir al gimnasio</li>
+        <li class="li2">Ir a clase</li>
+    </ol>
+
+
+    <input type="text" placeholder="Escribe aquí..." />
 </body>
 </html>
