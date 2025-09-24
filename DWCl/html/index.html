@@ -4,85 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicios</title>
+
     <script src="/DWCl/Scripts/script1.js"></script>
     <script src="/DWCl/Scripts/script2.js"></script>
+    <script src="/DWCl/Scripts/script3.js"></script>
+    <script src="/DWCl/Scripts/script4.js"></script>
+    <script src="/DWCl/Scripts/script5.js"></script>
+
     <style>
+        * {
+            margin: 10px;
+        }
 
-            *{
-                margin: 10px;
-            }
-            body { 
-                font-family: sans-serif;
-                display: flex; 
-                justify-content: center; 
-                align-items: center; 
-                height: 100vh; 
-                background-color: #f0f0f0; 
-            }
+        body { 
+            font-family: sans-serif;
+            display: flex; 
+            justify-content: center; 
+            background-color: #f0f0f0; 
+            padding: 20px;
+        }
 
-            .ejer { 
-                text-align: center; 
-                padding: 20px; 
-                border: 1px solid #ccc; 
-                border-radius: 8px; 
-                background-color: #fff; 
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-            }
+        .ejer { 
+            text-align: center; 
+            padding: 20px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            background-color: #fff; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            max-width: 600px;
+        }
 
-            .resultado { 
-                font-size: 1.5em; 
-                font-weight: bold; 
-                margin-top: 15px; 
-            }
+        .resultado { 
+            font-size: 1.3em; 
+            font-weight: bold; 
+            margin-top: 15px; 
+        }
 
-            table{
-               border-collapse: collapse;
-               width: 100%; 
-            }
-            td{
-                border: 3px solid red;
-            }
-            
-        </style>
+        table {
+           border-collapse: collapse;
+           width: 100%; 
+        }
+
+        td {
+            border: 3px solid red;
+        }
+    </style>
 </head>
 <body>
     <div class="ejer">
+        
         <h1>Ejercicio 1</h1>
         <h2>Cálculo de salario</h2>
-
         <form>
             <label for="nombre">Nombre: </label>
-            <input type="text" id="nom">
-            <br>
+            <input type="text" id="nom"><br>
             <label for="salActual">Salario Actual: </label>
-            <input type="number" id="salarioAct">
-            <br>
-            <label for="numeroH">Numero de hijos: </label>
-            <input type="number" id="numHijos">
-            <br>
+            <input type="number" id="salarioAct"><br>
+            <label for="numeroH">Número de hijos: </label>
+            <input type="number" id="numHijos"><br>
             <label for="edad">Edad: </label>
-            <input type="number" id="ed">
-            <br>
-            <button type="submit" onclick="procesar(event)">Enviar</button>
+            <input type="number" id="ed"><br>
+            <button onclick="procesar(event)">Enviar</button>
         </form>
+        <p id="res" class="resultado">Resultado:</p>
         <hr>
-        
-        <p id="res" class="resultado">Resultado: </p>
-        <hr>
-
+   
         <h1>Ejercicio 2</h1>
-
         <form>
             <label for="filas">Filas: </label>
             <input type="number" id="filas" min="1"><br>
-            <label for="filas">Columnas: </label>
+            <label for="columnas">Columnas: </label>
             <input type="number" id="columnas" min="1"><br>
-
             <button onclick="dibujarTabla(event)">Dibujar tabla</button>
         </form>
-        <div id="tabla"></div>  
-    </div>
-
+        <div id="tabla"></div>
+        <hr>
     
+        <h1>Ejercicio 3</h1>
+        <h2>Calcular el doble N veces</h2>
+        <form>
+            <label for="numero">Número: </label>
+            <input type="number" id="numero"><br>
+            <label for="veces">Número de veces: </label>
+            <input type="number" id="veces" min="1" placeholder="3"><br>
+            <button onclick="calcularDobles(event)">Calcular</button>
+        </form>
+        <p id="res3" class="resultado">Resultado:</p>
+        <hr>
+   
+        <h1>Ejercicio 4</h1>
+        <h2>Adivinar un número aleatorio (0 a 10)</h2>
+        <form>
+            <label for="intento">Tu número: </label>
+            <input type="number" id="intento" min="0" max="10"><br>
+            <button onclick="adivinarNumero(event)">Probar</button>
+        </form>
+        <p id="res4" class="resultado">Intentos: 0</p>
+        <hr>
+
+        <h1>Ejercicio 5</h1>
+        <h2>Comprobar números primos</h2>
+        <form>
+            <label>Elige una opción:</label><br>
+            <input type="radio" name="opcion" value="1" checked> 1: Comprobar si es primo<br>
+            <input type="radio" name="opcion" value="2"> 2: Mostrar todos los primos hasta N<br>
+            <label for="numeroPrimo">Número: </label>
+            <input type="number" id="numeroPrimo" min="1"><br>
+            <button onclick="comprobarPrimos(event)">Comprobar</button>
+        </form>
+        <p id="res5" class="resultado">Resultado:</p>
+    </div>
 </body>
 </html>
