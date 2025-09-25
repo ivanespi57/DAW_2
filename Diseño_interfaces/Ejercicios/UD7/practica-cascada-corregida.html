@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Práctica: Cascada, Especificidad y Layers (versión final)</title>
+
+  <style id="styles">
+    /* Definimos el orden correcto de capas */
+    @layer reset, theme; /* CORREGIDO */
+
+    @layer reset {
+      body { color: gray; }
+      h1 { color: green; }
+    }
+
+    @layer theme {
+      .btn { background: blue; color: white; }
+      .btn.primary { background: red; } 
+      footer { color: blue; }
+      h2 { color: purple; } /*sin !important */
+    }
+
+    
+    p { font-size: 14px; }
+    #main p .content{ font-size: 18px; }  
+
+    /* solo el primer párrafo dentro de .content más grande */
+    .content p:first-child { font-size: 22px; }
+
+    * { line-height: 2; }
+    p.note { line-height: 1.2; }
+
+    #menu a { color: orange; }
+    #menu a:hover { color: green; } /* gana sobre #menu a */
+
+    h2 { color: brown; }
+    footer { color: red; }
+  </style>
+</head>
+<body id="main">
+  <h1>Página de práctica</h1>
+
+  <section class="content">
+    <p>Este párrafo debería verse grande.</p>
+    <p class="note">Este párrafo tiene otra línea base.</p>
+  </section>
+
+  <nav id="menu">
+    <a href="#">Enlace 1</a>
+    <a href="#">Enlace 2</a>
+  </nav>
+
+  <button class="btn">Botón normal</button>
+  <button class="btn primary">Botón primario</button> <!-- sin inline style -->
+
+  <h2>Subtítulo problemático</h2>
+
+  <footer>Texto del footer</footer>
+</body>
+</html>
