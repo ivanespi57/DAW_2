@@ -1,50 +1,37 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-public class Intens_uso{
-    class Municipio {
-        String codigo;
-        String territorio;
-        Integer valor;
+public class Intens_uso {
+    public static void main(String[] args) throws Exception {
 
-        public Municipio(String codigo, String territorio, Integer valor) {
-            this.codigo = codigo;
-            this.territorio = territorio;
-            this.valor = valor;
-        }
-    }
+        String ruta = args[0];
+        int n = (args.length > 1) ? Integer.parseInt(args[1]) : 3;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String linea = "";
+        List<String[]> datos = new ArrayList<>();
 
-        if(args.length <= 0){
-            System.out.println("");
-        }else{
-            try{
-                
-                File f = new File(args[0]);
-                
-                FileReader fr = new FileReader(f);
-                BufferedReader br = new BufferedReader(fr);
-
-                while ((linea = br.readLine()) != null) {                
-                    
-                    
-                    String territorio = datos[3];
-                    String valor = datos[4];
-                    String cod;
-
+        BufferedReader br = new BufferedReader(new FileReader(ruta));
+        br.readLine();
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            String[] partes = linea.split(";");
+            if (partes.length >= 3) {
+                try {
+                    double valor = Double.parseDouble(partes[2].replace(",", "."));
+                    datos.add(new String[]{partes[0], String.valueOf(valor), partes[1]});
+                } catch (NumberFormatException e) {
                     
                 }
-                br.close();
-                fr.close();  
-
-            }catch(Exception e){
-                e.getMessage();
             }
+        }
+        br.close();
+
+        datos.sort((a, b) -> Double.compare(Double.parseDouble(b[1]), Double.parseDouble(a[1])));
+
+        for (int i = 0; i < Math.min(n, datos.size()); i++) {
+            System.out.println("Territorio: " + datos.get(i)[0]);
+            System.out.println("Valor: " + datos.get(i)[1]);
+            System.out.println("Código: " + datos.get(i)[2]);
+            System.out.println("---------------------");
         }
     }
 }
