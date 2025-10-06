@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Práctica UD8</title>
+  <link rel="stylesheet" href="/css/estilos.css" />
+  <style>
+    .contenedor {
+      color: blue;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      max-width: 640px;
+      font-family: Arial;
+      position: relative;
+    }
+
+    .contenedor span {
+      color: inherit;
+      font-weight: 700;
+    }
+
+    p {
+      font-weight: bold;
+    }
+
+    p strong.initial { font-weight: initial; }
+    p strong.revert { font-weight: revert; }
+
+    .after-ejemplo::after {
+      content: "Hola mundo";
+      display: block;
+      color: green;
+      margin-top: 0.5rem;
+    }
+
+    .fuente-correcta { font-family: "Times New Roman", serif; }
+    .fuente-incorrecta { font-family: Times New Roman, serif; }
+
+    @keyframes parpadeo {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .animacion-parpadeo { animation-name: parpadeo; animation-duration: 1s; animation-iteration-count: infinite; }
+    .animacion-parpadeo-comillas { animation-name: "parpadeo"; animation-duration: 1s; animation-iteration-count: infinite; }
+
+    .fondo-imagen {
+      width: 300px; height: 200px;
+      background-image: url("imagen.png");
+      background-size: cover;
+      border: 1px solid #000;
+      margin-top: 1rem;
+    }
+
+    /* Cajas solapadas con z-index */
+    .padre-zindex { position: relative; z-index: 1; border: 2px dashed red; padding: 2rem; margin-top: 1rem; }
+    .caja { width: 100px; height: 100px; position: absolute; top: 0; left: 0; opacity: 0.8; }
+    .caja1 { background: lightcoral; z-index: 1; transform: translate(20px, 20px); }
+    .caja2 { background: lightgreen; z-index: 2; transform: translate(60px, 60px); }
+    .caja3 { background: lightblue; z-index: 3; transform: translate(100px, 100px); }
+
+    .opacidad-correcta, .opacidad-incorrecta {
+      width: 150px; height: 80px; display: flex; align-items: center; justify-content: center;
+      color: white; margin-top: 1rem; border-radius: 6px; font-weight: 700;
+    }
+    .opacidad-correcta { background: rebeccapurple; opacity: 0.5; }
+    .opacidad-incorrecta { background: tomato; opacity: 0,5; }
+
+    .margin-top-ejemplo {
+      background: gold; width: 100%; height: 50px; margin-top: 10%;
+      display: flex; align-items: center; justify-content: center; font-weight: bold; border: 1px solid #000;
+    }
+
+    .grid-ejemplo { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; margin-top: 1rem; }
+    .grid-ejemplo div { background: lightgray; padding: 1rem; text-align: center; border: 1px solid #333; }
+
+    .em-ejemplo { font-size: 16px; padding: 2em; background: lightpink; margin-top: 1rem; }
+    .em-ejemplo .anidado { padding: 2em; background: palevioletred; margin-top: 0.5rem; }
+    .rem-ejemplo { font-size: 16px; padding: 2rem; background: lightblue; margin-top: 1rem; }
+    .rem-ejemplo .anidado { padding: 2rem; background: steelblue; margin-top: 0.5rem; }
+
+    h1 { font-size: 10vw; margin-top: 1rem; }
+    h2 { font-size: clamp(1rem, 5vw, 3rem); margin-top: 1rem; }
+
+    main { width: calc(100% - 200px); background: lightgreen; padding: 1rem; margin-top: 1rem; }
+    p.limite { width: min(90%, 600px); background: lightyellow; padding: 1rem; margin-top: 0.5rem; }
+
+    /* content con attr */
+    p[data-info]::after { content: " (" attr(data-info) ")"; }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <p>Este texto del div es azul.</p>
+    <br />
+    <p>Dentro hay un <span>span que hereda el color</span> usando color: inherit;</p>
+
+    <p>Este párrafo está en <strong>negrita por defecto</strong>.</p>
+    <p>Este párrafo tiene un <strong class="initial">strong con font-weight: initial</strong>.</p>
+    <p>Y este tiene un <strong class="revert">strong con font-weight: revert</strong>.</p>
+
+    <div class="after-ejemplo">Esto es un div con ::after →</div>
+
+    <p class="fuente-correcta">Este texto usa la fuente con comillas ("Times New Roman").</p>
+    <p class="fuente-incorrecta">Este texto intenta usar Times New Roman sin comillas.</p>
+
+    <p class="animacion-parpadeo">Este párrafo parpadea usando animation-name sin comillas.</p>
+    <p class="animacion-parpadeo-comillas">Este párrafo intenta parpadear usando animation-name con comillas (no funciona).</p>
+
+    <div class="fondo-imagen">Este div tiene una imagen de fondo con url("imagen.png")</div>
+
+    <div class="padre-zindex">
+      <div class="caja caja1"></div>
+      <div class="caja caja2"></div>
+      <div class="caja caja3"></div>
+      <p>Estas son tres cajas solapadas con distintos z-index. Cambia el z-index del padre para ver cómo limita el apilamiento de los hijos.</p>
+    </div>
+
+    <div class="opacidad-correcta">opacity: 0.5</div>
+    <div class="opacidad-incorrecta">opacity: 0,5 (inválido)</div>
+
+    <div class="margin-top-ejemplo">margin-top: 10%</div>
+
+    <div class="grid-ejemplo">
+      <div>1fr</div>
+      <div>2fr</div>
+    </div>
+
+    <div class="em-ejemplo">
+      padding: 2em (relativo al font-size del elemento)
+      <div class="anidado">Elemento anidado con padding 2em</div>
+    </div>
+
+    <div class="rem-ejemplo">
+      padding: 2rem (relativo al font-size raíz)
+      <div class="anidado">Elemento anidado con padding 2rem</div>
+    </div>
+
+    <h1>10vw Heading</h1>
+    <h2>Heading con clamp(1rem, 5vw, 3rem)</h2>
+
+    <main>Main con width: calc(100% - 200px)</main>
+    <p class="limite">Este párrafo usa width: min(90%, 600px) para limitar el ancho.</p>
+
+    <p data-info="Capítulo 1">Hola</p>
+  </div>
+</body>
+</html>
