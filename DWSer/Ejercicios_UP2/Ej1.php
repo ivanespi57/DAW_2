@@ -1,16 +1,22 @@
 <?php
     function potencia($n, $x){
-       
+        
+        $potencias = [];
+
         for($i = 0; $i <= $x; $i++){
-            $pote = n *2;
-            $vec[] = $pote;
+            $potencias[] = pow($n,$i);
         }
-        return $vec;
+        
     }
+    potencia(7, 10);
+    $suma = 0;
 
-    $resultado = potencia(7, 10);
-
-    foreach($resultado as $i => $v){
+    foreach($potencias as $i => $v){
         echo "Potencia " . ($i+1) . " = $v <br>";
+        $suma += $v;
     }
+
+    echo "Suma de las potencias: $suma";
+
+    
 ?>
