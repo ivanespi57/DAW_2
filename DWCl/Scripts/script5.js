@@ -20,18 +20,18 @@ function comprobarPrimos(event) {
     if (opcion === "1") {
         // Comprobar si el número es primo
         let resultado = esPrimo(numero)
-            ? `El número ${numero} es primo ✅`
-            : `El número ${numero} NO es primo ❌`;
+            ? `El número ${numero} es primo`
+            : `El número ${numero} NO es primo`;
         document.getElementById("res5").textContent = resultado;
 
     } else if (opcion === "2") {
-        // Mostrar todos los primos hasta el número
+
         let primos = [];
         for (let i = 1; i <= numero; i++) {
             if (esPrimo(i)) primos.push(i);
         }
         console.log("Primos encontrados:", primos);
         document.getElementById("res5").textContent = 
-            `Se han encontrado ${primos.length} números primos. Mira la consola para verlos.`;
+            `Se han encontrado ${primos.length} números primos.`;
     }
 }
