@@ -4,24 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicios</title>
+    <style>
+                * {
+            margin: 10px;
+        }
 
-    <script src="/DWCl/Scripts/2-1/script1.js"></script>
-    <script src="/DWCl/Scripts/2-1/script2.js"></script>
-    <script src="/DWCl/Scripts/2-1/script3.js"></script>
-    <script src="/DWCl/Scripts/2-1/script4.js"></script>
-    <script src="/DWCl/Scripts/2-1/script5.js"></script>
+        body { 
+            font-family: sans-serif;
+            display: flex; 
+            justify-content: center; 
+            background-color: #f0f0f0; 
+            padding: 20px;
+        }
+
+        .ejer { 
+            text-align: center; 
+            padding: 20px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            background-color: #fff; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            max-width: 600px;
+        }
+
+        .resultado { 
+            font-size: 1.3em; 
+            font-weight: bold; 
+            margin-top: 15px; 
+        }
+
+        table {
+           border-collapse: collapse;
+           width: 100%; 
+        }
+
+        td {
+            border: 3px solid red;
+        }
+    </style>
+
+    <script src="/DWCl/Scripts/2-2/script1.js"></script>
+    <script src="/DWCl/Scripts/2-2/script2.js"></script>
+    <script src="/DWCl/Scripts/2-2/script3.js"></script>
+    <script src="/DWCl/Scripts/2-2/script4.js"></script>
+    <script src="/DWCl/Scripts/2-2/script5.js"></script>
 </head>
 <body>
-    <h1>Ejercicio 1</h1><br>
-    <form>
-        <p>Escriba dos cadenas de texto</p> 
-        <label>Primera cadena:</label>
-        <textarea name="primera" id="primera"></textarea><br>
-        <label>Segunda cadena:</label>
-        <textarea name="segunda" id="segunda"></textarea><br>
-        
-        <button onclick="procesar(event)">Enviar</button>
-    </form>
-    <p id="res" class="resultado">Resultado:</p>
+    <div class="ejer">
+        <h1>Ejercicio 1</h1><br>
+        <form>
+            <p>Escriba dos cadenas de texto</p> 
+            <label>Primera cadena:</label>
+            <textarea name="primera" id="primera"></textarea><br>
+            <label>Segunda cadena:</label>
+            <textarea name="segunda" id="segunda"></textarea><br>
+            
+            <button onclick="procesar(event)">Enviar</button>
+        </form>
+        <p id="res"></p>
+        <hr>
+        <h1>Ejercicio 2</h1>
+
+        <label>Texto a cifrar:</label><br>
+        <input type="text" id="texto" placeholder="Escribe tu texto"><br>
+
+        <label>Número de desplazamiento:</label><br>
+        <input type="number" id="desplazamiento"><br>
+
+        <button onclick="cifrar(event)">Cifrar</button>
+
+        <p id="resultado"></p>
+        <hr>
+        <h1>Ejercicio 3</h1>
+
+        <label>Primera cadena:</label><br>
+        <input type="text" id="cadena1"><br><br>
+
+        <label>Segunda cadena:</label><br>
+        <input type="text" id="cadena2"><br><br>
+
+        <button onclick="procesar()">Procesar</button>
+
+        <p id="resul"></p>
+    </div>
+
 </body>
 </html>
