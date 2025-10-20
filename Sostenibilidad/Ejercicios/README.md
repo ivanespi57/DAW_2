@@ -10,7 +10,7 @@ El objetivo principal es **leer un archivo CSV o de texto** con datos separados 
 
 El usuario introduce por consola:
 - La **ruta del archivo** como primer argumento.
-- Y opcionalmente, el **número de resultados** que quiere ver (por defecto son 3).
+- Y el **número de resultados** que quiere ver.
 
 Así, el programa **ordena los datos de mayor a menor** y muestra los territorios con sus valores y códigos.  
 En resumen, sirve para **analizar información numérica de forma rápida**, sin usar hojas de cálculo.
