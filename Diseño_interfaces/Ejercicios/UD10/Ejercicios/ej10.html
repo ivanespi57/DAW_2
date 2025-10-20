@@ -16,20 +16,34 @@
         }
 
         .header {
-            /* TU CÓDIGO AQUÍ - header fijo */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             background: #333;
             color: white;
             padding: 1em;
+            z-index: 1000;
+        }
+
+        .header nav a {
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
         }
 
         .wrapper {
-            /* TU CÓDIGO AQUÍ - contenedor principal */
+            margin-top: 90px;
+            overflow: hidden;
+            padding: 20px;
         }
 
         .sidebar {
-            /* TU CÓDIGO AQUÍ - sidebar flotante */
+            float: left;
+            width: 220px;
             background: #f0f0f0;
             padding: 20px;
+            border-right: 1px solid #ccc;
         }
 
         .sidebar ul {
@@ -40,13 +54,18 @@
             margin: 10px 0;
         }
 
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+        }
+
         .main-content {
-            /* TU CÓDIGO AQUÍ - contenido principal */
+            margin-left: 250px;
             padding: 20px;
         }
 
         .footer {
-            /* TU CÓDIGO AQUÍ - footer al final */
+            clear: both;
             background: #666;
             color: white;
             padding: 20px;
@@ -54,7 +73,9 @@
         }
 
         .scroll-top {
-            /* TU CÓDIGO AQUÍ - botón scroll to top fijo */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: #007bff;
             color: white;
             border: none;
@@ -62,6 +83,12 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
+            font-size: 20px;
+            transition: background 0.3s;
+        }
+
+        .scroll-top:hover {
+            background: #0056b3;
         }
     </style>
 </head>
@@ -69,9 +96,9 @@
     <header class="header">
         <h1>Mi Sitio Web</h1>
         <nav>
-            <a href="#" style="color: white; margin-right: 20px;">Inicio</a>
-            <a href="#" style="color: white; margin-right: 20px;">Acerca</a>
-            <a href="#" style="color: white;">Contacto</a>
+            <a href="#">Inicio</a>
+            <a href="#">Acerca</a>
+            <a href="#">Contacto</a>
         </nav>
     </header>
 
@@ -116,7 +143,7 @@
         <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
     </footer>
 
-    <button class="scroll-top">↑</button>
+    <button class="scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
 
     <div style="background: #f8f9fa; padding: 20px; margin: 20px;">
         <h3>Objetivo del Layout:</h3>
@@ -124,10 +151,10 @@
             <li>Header fijo en la parte superior</li>
             <li>Sidebar flotante a la izquierda</li>
             <li>Contenido principal que fluye alrededor del sidebar</li>
-            <li>Footer que siempre esté al final de la página</li>
-            <li>Un botón "scroll to top" fijo en la esquina inferior derecha</li>
+            <li>Footer al final de la página</li>
+            <li>Botón "scroll to top" fijo en la esquina inferior derecha</li>
         </ul>
-        <p><strong>Restricción:</strong> No uses Flexbox ni Grid, solo float y position.</p>
+        <p><strong>Restricción:</strong> No se usa Flexbox ni Grid, solo float y position.</p>
     </div>
 </body>
 </html>

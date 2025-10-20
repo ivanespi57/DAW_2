@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ejercicio 9: Tooltip Inteligente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .trigger {
+            position: relative;
+            cursor: pointer;
+            color: royalblue;
+            border-bottom: 1px dotted rgba(0,0,0,0.2);
+            display: inline-block;
+        }
+
+        .trigger::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 10px);
+            transform: translateX(-50%) translateY(6px);
+            white-space: nowrap;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: #222;
+            color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1000;
+            transition: opacity 180ms ease, transform 180ms ease;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        }
+
+        .trigger::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 2px); 
+            transform: translateX(-50%) translateY(6px);
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 7px solid #222;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 180ms ease, transform 180ms ease;
+            z-index: 1000;
+        }
+
+        .trigger:hover::before,
+        .trigger:focus::before,
+        .trigger:hover::after,
+        .trigger:focus::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .trigger:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(65,105,225,0.15);
+        }
+
+        @media (max-width: 420px) {
+            .trigger::before {
+                white-space: normal;
+                max-width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 9: Tooltip Inteligente</h1>
+    <p><strong>Objetivo:</strong> Crea un tooltip que aparezca al hacer hover, centrado respecto al elemento trigger.</p>
+
+    <div style="margin: 100px 0;">
+        <p>Pasa el ratón sobre <span class="trigger" tabindex="0" data-tooltip="Esto es un tooltip centrado">esta palabra</span> para ver el tooltip.</p>
+        
+        <p>También puedes probar con <span class="trigger" tabindex="0" data-tooltip="Otro mensaje de ejemplo">otra palabra</span> en diferentes posiciones del texto.</p>
+        
+        <p>El tooltip debería aparecer <span class="trigger" tabindex="0" data-tooltip="Posicionado correctamente sin JS">correctamente posicionado</span> sin importar dónde esté la palabra en la página.</p>
+    </div>
+
+    <h3>Reto:</h3>
+    <p>Hecho solo con CSS (sin JavaScript).</p>
+
+    <h3>Requisitos cumplidos:</h3>
+    <ul>
+        <li>Aparece centrado respecto al elemento trigger (uso de left:50% y translateX(-50%)).</li>
+        <li>Tiene una flecha apuntando al elemento (pseudo::after con borders).</li>
+        <li>Aparece/desaparece suavemente (transiciones en opacity y transform).</li>
+        <li>Usa únicamente CSS (::before y ::after) y el contenido del tooltip se pasa con <code>data-tooltip</code>.</li>
+    </ul>
+</body>
+</html>

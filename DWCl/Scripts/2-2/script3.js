@@ -1,4 +1,4 @@
-function procesar() {
+function pera(event) {
     let c1 = document.getElementById("cadena1").value;
     let c2 = document.getElementById("cadena2").value;
     let cadena = "";
