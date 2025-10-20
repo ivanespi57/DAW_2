@@ -27,7 +27,7 @@ import java.util.*;
 public class IntensUsoSimple {
     public static void main(String[] args) throws Exception {
         if (args.length < 2) {
-            System.out.println("Uso: java IntensUsoSimple <ruta_csv> <n>");
+            System.out.println("Uso: java Intens_uso <ruta_csv> <n>");
             return;
         }
 
