@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class IntensUsoSimple {
+public class Intens_uso{
     public static void main(String[] args) {
         if (args.length < 2) {
             System.out.println("Uso: java Intens_uso <ruta_csv> <n>");
