@@ -79,7 +79,6 @@ El proyecto está desarrollado en **Java SE**, utilizando herramientas básicas 
 
 - **Lectura de archivos** con `BufferedReader` y `FileReader`.
 - **Estructuras de datos dinámicas** como `ArrayList`.
-- **Expresiones lambda** para ordenar los datos de forma descendente.
 - **Gestión de excepciones** con `try-catch` para evitar errores de formato.
 
 Esto lo hace un programa **simple, eficiente y fácil de mantener**.
