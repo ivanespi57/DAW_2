@@ -7,7 +7,7 @@
 <body>
     <h1>Iván Espí Asins</h1>
     <hr>
-    <h2>Comprobar tipo de carácter (con funciones ctype)</h2>
+    <h2>Comprobar tipo de carácter</h2>
 
     <form method="post">
         <label>Introduce un carácter:</label>
@@ -17,20 +17,20 @@
 
     <?php
         if ($_POST) {
-            $car = $_POST['caracter'];
+            $caract = $_POST['caracter'];
 
             echo "<hr>";
-            echo "<p>El carácter introducido es: <strong>$car</strong></p>";
+            echo "<p>El carácter introducido es: <strong>$caract</strong></p>";
 
-            if (ctype_upper($car)) {
+            if (ctype_upper($caract)) {
                 echo "<p>Es una letra <strong>mayúscula</strong>.</p>";
-            } elseif (ctype_lower($car)) {
+            } elseif (ctype_lower($caract)) {
                 echo "<p>Es una letra <strong>minúscula</strong>.</p>";
-            } elseif (ctype_digit($car)) {
+            } elseif (ctype_digit($caract)) {
                 echo "<p>Es un carácter <strong>numérico</strong>.</p>";
-            } elseif (ctype_space($car)) {
+            } elseif (ctype_space($caract)) {
                 echo "<p>Es un carácter <strong>en blanco</strong>.</p>";
-            } elseif (ctype_punct($car)) {
+            } elseif (ctype_punct($caract)) {
                 echo "<p>Es un carácter <strong>de puntuación</strong>.</p>";
             } else {
                 echo "<p>Es un carácter <strong>especial o no imprimible</strong>.</p>";
