@@ -10,7 +10,7 @@
     <h2>Calcular coste de 5 llamadas telefónicas</h2>
 
     <form method="post">
-        <p>Introduce la duración (en minutos) de cada llamada:</p>
+        <p>Introduce la duración de cada llamada:</p>
 
         <label>Llamada 1:</label>
         <input type="number" name="llamada1" min="0" required><br><br>
@@ -32,7 +32,7 @@
 
     <?php
         if ($_POST) {
-            // Recoger las duraciones
+
             $llamadas = [
                 $_POST['llamada1'],
                 $_POST['llamada2'],
@@ -46,21 +46,20 @@
             echo "<hr>";
             echo "<h3>Resultados:</h3>";
 
-            // Calcular el coste de cada llamada
             foreach ($llamadas as $i => $minutos) {
                 if ($minutos <= 3) {
-                    $costo = 0.10; // 10 céntimos
+                    $costo = 0.10;
                 } else {
-                    $costo = 0.10 + ($minutos - 3) * 0.05; // 5 céntimos por cada minuto extra
+                    $costo = 0.10 + ($minutos - 3) * 0.05;
                 }
 
                 $total += $costo;
 
-                echo "<p>Llamada " . ($i + 1) . ": $minutos minutos → " . number_format($costo, 2) . " €</p>";
+                echo "<p>Llamada " . ($i + 1) . ": $minutos minutos → " . $costo. " €</p>";
             }
 
             echo "<hr>";
-            echo "<h3>💰 Coste total de las 5 llamadas: " . number_format($total, 2) . " €</h3>";
+            echo "<h3>Coste total de las 5 llamadas: " . $total . " €</h3>";
         }
     ?>
 </body>
