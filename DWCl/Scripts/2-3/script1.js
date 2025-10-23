@@ -1,24 +1,19 @@
-function multi(event){
-    event.preventDefault();
+function multi(){
     
-    let num = parseFloat(document.getElementById("num").value); 
+    let num = parseFloat(prompt("Introduce un número (no entre -1 y 1):"));
     
-    if (num === 1 || num === 0 || num === -1) {
-        document.getElementById("result").innerHTML = "No puedes usar 1, 0 ni -1.";
-        return;
+    if (isNaN(num) || (num > -1 && num < 1)) {
+        alert("Número no válido.");
+    } else {
+        let v = num;
+        let contador = 0;
+    
+        while (isFinite(v)) {
+            v = v * num;
+            contador++;
+            console.log(num + " x " + (v / num) + " = " + v);
+        }
+    
+        console.log("Se ha llegado al infinito tras " + contador + " multiplicaciones.");
     }
-
-    let contador = 0;
-    let v = num;
-
-    while(v < Infinity){
-        let x = v;
-        v = v * num;
-        contador++;
-        
-        document.getElementById("result").innerHTML = num + " x " + x + " = " + v + "<br>Se ha multiplicado " + contador + " veces.";
-    }
-
 }
-    
-        

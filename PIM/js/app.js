@@ -13,15 +13,15 @@ const btnRef = document.getElementById('btn-refrescar');
 
 
 rango.addEventListener('input', () => {
-rangoVal.textContent = rango.value;
-controlador.setMaxEstaciones(Number(rango.value));
+    rangoVal.textContent = rango.value;
+    controlador.setMaxEstaciones(Number(rango.value));
 });
 
 
 btnRef.addEventListener('click', () => controlador.refrescar());
 
 
-await controlador.iniciarAplicacion();
+    await controlador.iniciarAplicacion();
 };
 
 

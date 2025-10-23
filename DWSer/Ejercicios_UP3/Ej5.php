@@ -7,7 +7,7 @@
 <body>
     <h1>Iván Espí Asins</h1>
     <hr>
-    <h2>Calcular salarios0</h2>
+    <h2>Calcular salarios</h2>
 
     <form method="post">
         

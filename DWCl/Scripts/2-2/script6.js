@@ -8,7 +8,7 @@ function generarCadenas(event) {
     let resultado = "";
 
     for (let i = 0; i < num; i++) {
-        let longitud = Math.floor(Math.random() * 11); // 0 a 10
+        let longitud = Math.floor(Math.random() * 11); 
         if (longitud === 0) {
             resultado += '"" ';
             vacias++;
