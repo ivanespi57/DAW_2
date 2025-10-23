@@ -1,0 +1,158 @@
+/* ======== ESTILOS BÁSICOS — Disponibilidad Valenbisi ======== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", Arial, sans-serif;
+  margin: 0;
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+/* CABECERA */
+.cabecera {
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.cabecera h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #0077b6;
+}
+
+.cabecera .sub {
+  margin-top: 0.3rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.panel {
+  background: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* CONTROLES */
+#controles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+#controles label {
+  font-weight: 600;
+}
+
+#controles input[type="range"] {
+  width: 150px;
+}
+
+#controles span {
+  font-weight: 600;
+  color: #0077b6;
+}
+
+#btn-refrescar {
+  background: #0077b6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#btn-refrescar:hover {
+  background: #0096c7;
+}
+
+/* MAPA */
+.mapa {
+  height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* TABLA */
+.tabla-panel {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #eaeaea;
+  text-align: left;
+}
+
+th {
+  background-color: #f3f6f9;
+  font-weight: 600;
+  color: #333;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* PIE */
+.pie {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* LEYENDA DEL MAPA */
+.legend {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 4000;
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.legend strong {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+/* RESPONSIVE */
+@media (min-width: 900px) {
+  .contenedor {
+    grid-template-columns: 0.45fr 0.55fr;
+  }
+
+  .mapa {
+    grid-column: 1 / span 2;
+    height: 480px;
+  }
+}
