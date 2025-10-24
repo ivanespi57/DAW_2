@@ -16,9 +16,6 @@ function calcularCuenta() {
     return;
   }
 
-  if (isNaN(mayores)) mayores = 0;
-  if (isNaN(ninos)) ninos = 0;
-
   if (mayores + ninos > total) {
     console.log("La suma de mayores y niños no puede superar el total.");
     return;
@@ -30,9 +27,6 @@ function calcularCuenta() {
   let m2 = parseInt(prompt("Número de menús tipo 2 (precio " + MENU2 + " €):"));
   let m3 = parseInt(prompt("Número de menús tipo 3 (precio " + MENU3 + " €):"));
 
-  if (isNaN(m1)) m1 = 0;
-  if (isNaN(m2)) m2 = 0;
-  if (isNaN(m3)) m3 = 0;
 
   if (m1 + m2 + m3 !== adultos) {
     console.log("La suma de menús de adultos no coincide con el número de adultos.");
