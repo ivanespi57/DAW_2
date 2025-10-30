@@ -30,9 +30,15 @@ function interNumeros(){
 
     let numal = [];
     for(let i = 0; i <= 5; i++){
-        
+        numal.push(Math.floor(Math.random() * 100) + 1);
     }
 
-
-    intervalo.nuevosValores = aleatorios;
+    console.log("Intervalo:");
+    console.log("Array: ", inter.dentro);
+    console.log("Mínimo: ", inter.minimo);
+    console.log("Máximo: ", inter.maximo);
+    console.log("Aleatorios:");
+    console.log("Array: ", inter.alea = numal);
+    console.log("Mínimo: ", inter.minimo);
+    console.log("Máximo: ", inter.maximo);
 }
