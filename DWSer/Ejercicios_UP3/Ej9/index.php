@@ -1,52 +1,122 @@
+<?php
+    session_start();
+
+    $errores = [];
+    $nombre = "";
+    $apellido = "";
+    $correo = "";
+    $estudios = "";
+    $actual = [];
+    $hobbies = [];
+    $otroHobbie = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombre = trim($_POST["nombre"]);
+        $apellido = trim($_POST["apellido"]);
+        $correo = trim($_POST["correo"]);
+        $estudios = $_POST["estudios"] ?? "";
+        $actual = $_POST["actual"] ?? [];
+        $hobbies = $_POST["hobbies"] ?? [];
+        $otroHobbie = trim($_POST["otroHbb"] ?? "");
+
+        if (empty($nombre)) {
+            $errores["nombre"] = "El nombre es obligatorio.";
+        }
+        if (empty($apellido)) {
+            $errores["apellido"] = "Los apellido son obligatorios.";
+        }
+        if (empty($correo)) {
+            $errores["correo"] = "Introduce un correo válido.";
+        }
+        if (empty($estudios)) {
+            $errores["estudios"] = "Selecciona tu nivel de estudios.";
+        }
+        if (empty($actual)) {
+            $errores["actual"] = "Selecciona al menos una situación.";
+        }
+        if (empty($hobbies)) {
+            $errores["hobbies"] = "Selecciona al menos un hobbie.";
+        }
+
+        if (isset($_POST["enviar"]) && empty($errores)) {
+            $_SESSION["datos"] = [
+                "nombre" => $nombre,
+                "apellido" => $apellido,
+                "correo" => $correo,
+                "estudios" => $estudios,
+                "actual" => $actual,
+                "hobbies" => $hobbies,
+                "otroHbb" => $otroHobbie
+            ];
+            header("Location: Ej9.php");
+            exit;
+        }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 9</title>
+    <title>Iván Espí Asins</title>
+    <style>
+        label {
+            font-weight: bold;
+        }
+        span {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <h1>Iván Espí Asins</h1>
-    <h2>Formulario de recogida de datos</h2>
 
-    <form method="post" action="Ej9.php">
-        <label>Nombre:</label><br>
-        <input type="text" name="nombre" required><br><br>
+    <h2>Iván Espí Asins</h2>
+    <hr> 
+    <h1>Formulario de recogida de datos</h1>
 
-        <label>Primer apellido:</label><br>
-        <input type="text" name="apellido" required><br><br>
+    <form method="POST" action="index.php">
+        
+        <label>Nombre</label><br>
+        <input type="text" name="nombre" value="<?= htmlspecialchars($nombre) ?>" size="25"><br>
+        <span><?= $errores["nombre"] ?? "" ?></span><br><br>
+        
+        <label>Apellidos</label><br>
+        <input type="text" name="apellido" value="<?= htmlspecialchars($apellido) ?>" size="25"><br>
+        <span><?= $errores["apellido"] ?? "" ?></span><br><br>
+       
+        <label>Correo electrónico</label><br>
+        <input type="email" name="correo" placeholder="ejemplo@gmail.com" value="<?= htmlspecialchars($correo) ?>" size="25"><br>
+        <span><?= $errores["correo"] ?? "" ?></span><br><br>
+        
+        <label>Nivel de estudios</label><br>
+        <select name="estudios">
+            <option value="">Seleccione...</option>
+            <option value="ESO" <?= $estudios=="ESO"?"selected":"" ?>>ESO</option>
+            <option value="Bachillerato" <?= $estudios=="Bachillerato"?"selected":"" ?>>Bachillerato</option>
+            <option value="Grado Medio" <?= $estudios=="Grado Medio"?"selected":"" ?>>Grado Medio</option>
+            <option value="Grado Superior" <?= $estudios=="Grado Superior"?"selected":"" ?>>Grado Superior</option>
+            <option value="Universidad" <?= $estudios=="Universidad"?"selected":"" ?>>Universidad</option>
+        </select><br>
+        <span><?= $errores["estudios"] ?? "" ?></span><br><br>
 
-        <label>Nivel de estudios:</label><br>
-        <select name="estudios" required>
-            <option>Seleccione...</option>
-            <option value="ESO">ESO</option>
-            <option value="Bachillerato">Bachillerato</option>
-            <option value="Grado Medio">Grado medio</option>
-            <option value="Grado Superior">Grado superior</option>
-            <option value="Grado Universitario">Grado universitario</option>
-        </select>
-        <br><br>
-
-        <label>Situación actual:</label><br>
-        <select name="actual[]" multiple required>
-            <option name="actual[]" value="Estudiando">Estudiando</option>
-            <option name="actual[]" value="Trabajando">Trabajando</option>
-            <option name="actual[]" value="Desempleado">Desempleado</option>
-            <option name="actual[]" value="Buscando Empleo">Buscando empleo</option>
-        </select>
-        <br><br>
+        <label>Situación actual</label><br>
+        <input type="checkbox" name="actual[]" value="Estudiando" <?= in_array("Estudiando",$actual)?"checked":"" ?>> Estudiando<br>
+        <input type="checkbox" name="actual[]" value="Trabajando" <?= in_array("Trabajando",$actual)?"checked":"" ?>> Trabajando<br>
+        <input type="checkbox" name="actual[]" value="Buscando Empleo" <?= in_array("Buscando Empleo",$actual)?"checked":"" ?>> Buscando empleo<br>
+        <input type="checkbox" name="actual[]" value="Desempleado" <?= in_array("Desempleado",$actual)?"checked":"" ?>> Desempleado<br>
+        <span><?= $errores["actual"] ?? "" ?></span><br><br>
 
         <label>Hobbies</label><br>
-        <label>
-            <input type="checkbox" name="hobbies[]" value="jugVideo">Jugar videojuegos <br>
-            <input type="checkbox" name="hobbies[]" value="depor">Hacer deporte <br>
-            <input type="checkbox" name="hobbies[]" value="leer">Leer <br>
-            <input type="checkbox" name="hobbies[]" value="tejer">Tejer <br>
-            <input type="checkbox" name="hobbies[]" value="otro" id="otroHob"> Otro:
-            <input type="text" name="hobbies[]" id="otroHob" placeholder="Escribe aquí...">
-        </label><br><br>
+        <input type="checkbox" name="hobbies[]" value="Videojuegos" <?= in_array("Videojuegos",$hobbies)?"checked":"" ?>> Jugar videojuegos<br>
+        <input type="checkbox" name="hobbies[]" value="Deporte" <?= in_array("Deporte",$hobbies)?"checked":"" ?>> Hacer deporte<br>
+        <input type="checkbox" name="hobbies[]" value="Leer" <?= in_array("Leer",$hobbies)?"checked":"" ?>> Leer<br>
+        <input type="checkbox" name="hobbies[]" value="Tejer" <?= in_array("Tejer",$hobbies)?"checked":"" ?>> Tejer<br>
+        <input type="checkbox" name="hobbies[]" value="Otro" <?= in_array("Otro",$hobbies)?"checked":"" ?>> Otro:
+        <input type="text" name="otroHbb" placeholder="Escribe aquí..." size="25" value="<?= htmlspecialchars($otroHobbie) ?>"><br>
+        <span><?= $errores["hobbies"] ?? "" ?></span><br><br>
 
-        <input type="submit" value="Enviar">
-        <input type="submit" value="Validar">
+        <input type="submit" name="validar" value="Validar">
+        <input type="submit" name="enviar" value="Enviar">
     </form>
 
 </body>
