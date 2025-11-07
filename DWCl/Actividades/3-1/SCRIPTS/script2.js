@@ -98,7 +98,7 @@ function empezar(){
     }
 
     let p1 = new Persona("Iván", "Espí", 21);
-    let p2 = new Persona("Lucía", "García", 19);
+    let p2 = new Persona("Carmen", "García", 19);
 
     let e1 = new Empleado("Carlos", "López", 25, 1500);
     let e2 = new Empleado("Marta", "Ruiz", 30, 1800);
