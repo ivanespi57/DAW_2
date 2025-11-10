@@ -3,36 +3,40 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class BuscadorAvesAPI {
+public class SearchBirdsAPI {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException {
         try {
             // URL de la API (GET todas las aves)
             String apiUrl = "http://127.0.0.1:9191/api.php";
+            // Updated to Java 20
+        
 
             // Realizar la petición GET
-            String respuesta = enviarPeticionGET(apiUrl);
+            String response = sendGETPetition(apiUrl);
 
             // Mostrar la respuesta
-            System.out.println("Respuesta de la API:");
-            imprimirJSONMono(respuesta);
+            System.out.println("Response from API:");
+            System.out.println(response);
+            printJSONLint(response);
 
         } catch (IOException e) {
-            System.err.println("Error al conectar con la API: " + e.getMessage());
+            System.err.println("Error connecting with API: " + e.getMessage());
         }
     }
 
-    private static String enviarPeticionGET(String url) throws IOException {
+    private static String sendGETPetition(String url) throws IOException, URISyntaxException {
         HttpURLConnection conexion = null;
         BufferedReader reader = null;
         StringBuilder respuesta = new StringBuilder();
 
         try {
             // Crear la conexión
-            URL apiURL = new URL(url);
+            URL apiURL = new URI(url).toURL();
             conexion = (HttpURLConnection) apiURL.openConnection();
             conexion.setRequestMethod("GET");
             conexion.setRequestProperty("Accept", "application/json");
@@ -64,24 +68,24 @@ public class BuscadorAvesAPI {
     }
     
     
-private static void imprimirJSONMono(String json) {
+private static void printJSONLint(String json) {
         try {
             // Si la respuesta es un array de aves
-            JSONArray avesArray = new JSONArray(json);
+            JSONArray birdsArray = new JSONArray(json);
             System.out.println("🌿 Lista de aves en la Albufera 🌿\n");
             System.out.println("+----+----------------+---------------------+----------------+-----------------------+");
             System.out.println("| ID |    Nombre      |      Cientifico       |   Descripción    | Img    |");
             System.out.println("+----+----------------+---------------------+----------------+-----------------------+");
 
-            for (int i = 0; i < avesArray.length(); i++) {
-                JSONObject ave = avesArray.getJSONObject(i);
+            for (int i = 0; i < birdsArray.length(); i++) {
+                JSONObject bird = birdsArray.getJSONObject(i);
                 System.out.printf(
                     "| %2d | %-14s | %-19s | %-14s | %-21s |\n",
-                    ave.getInt("id_ave"),
-                    ave.getString("nombre_comun"),
-                    ave.getString("nombre_cientifico"),
-                    ave.getString("descripcion"),
-                    ave.getString("imagen_url")
+                    bird.getInt("bird_id"),
+                    bird.getString("common_name"),
+                    bird.getString("scientific_name"),
+                    bird.getString("description"),
+                    bird.getString("img_url")
                 );
             }
 
@@ -89,13 +93,13 @@ private static void imprimirJSONMono(String json) {
         } catch (Exception e) {
             // Si la respuesta es un solo objeto (por ejemplo, al buscar por ID)
             
-            JSONObject ave = new JSONObject(json);
+            JSONObject bird = new JSONObject(json);
             System.out.println("\n📜 Detalle del ave 📜");
-            System.out.println("ID: " + ave.getInt("v"));
-            System.out.println("Nombre: " + ave.getString("nombre_comun"));
-            System.out.println("Científico: " + ave.getString("nombre_cientifico"));
-            System.out.println("Descripción: " + ave.getString("descripcion"));
-            System.out.println("Imagen: " + ave.getString("imagen_url"));
+            System.out.println("ID: " + bird.getInt("bird_id"));
+            System.out.println("Nombre: " + bird.getString("common_name"));
+            System.out.println("Científico: " + bird.getString("scientific_name"));
+            System.out.println("Descripción: " + bird.getString("description"));
+            System.out.println("Imagen: " + bird.getString("img_url"));
             
         }
     }
