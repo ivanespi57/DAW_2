@@ -1,31 +1,51 @@
 <?php
-    $usuarioAnterior = isset($_COOKIE["nombre"]) ? $_COOKIE["nombre"] : "Ninguno";
-    $idiomaAnterior  = isset($_COOKIE["idioma"]) ? $_COOKIE["idioma"] : "Ninguno";
-    $colorAnterior   = isset($_COOKIE["color"]) ? $_COOKIE["color"] : "Ninguno";
-    $ciudadAnterior  = isset($_COOKIE["ciudad"]) ? $_COOKIE["ciudad"] : "Ninguna";
 
+    $num1Anterior = isset($_COOKIE["num1"]) ? $_COOKIE["num1"] : "Ninguno";
+    $num2Anterior = isset($_COOKIE["num2"]) ? $_COOKIE["num2"] : "Ninguno";
+    $operacionAnterior = isset($_COOKIE["operacion"]) ? $_COOKIE["operacion"] : "Ninguna";
+    $resultadoAnterior = isset($_COOKIE["resultado"]) ? $_COOKIE["resultado"] : "Ninguno";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombre = trim($_POST["nombre"]);
-        $idioma = $_POST["idioma"];
-        $color = $_POST["color"];
-        $ciudad = $_POST["ciudad"];
 
-        setcookie("nombre", $nombre, time() + 3600);
-        setcookie("idioma", $idioma, time() + 3600);
-        setcookie("color", $color, time() + 3600);
-        setcookie("ciudad", $ciudad, time() + 3600);
+        $num1 = $_POST["num1"];
+        $num2 = $_POST["num2"];
+        $operacion = $_POST["operacion"];
+
+        $resultado = "";
+
+        switch ($operacion) {
+            case "suma":
+                $resultado = $num1 + $num2;
+                break;
+            case "resta":
+                $resultado = $num1 - $num2;
+                break;
+            case "multiplicacion":
+                $resultado = $num1 * $num2;
+                break;
+            case "division":
+                $resultado = ($num2 != 0) ? $num1 / $num2 : "Error: No se puede dividir entre 0";
+                break;
+            default:
+                $resultado = "Operación no válida";
+        }
+
+        setcookie("num1", $num1, time() + 3600);
+        setcookie("num2", $num2, time() + 3600);
+        setcookie("operacion", $operacion, time() + 3600);
+        setcookie("resultado", $resultado, time() + 3600);
 
         echo "<h3>Resultados actuales:</h3>";
-        echo "<p><strong>Nombre:</strong> $nombre</p>";
-        echo "<p><strong>Preferencia de idioma:</strong> $idioma</p>";
-        echo "<p><strong>Color:</strong><span style='color:{$color}'>$color</p>";
-        echo "<p><strong>Ciudad:</strong> $ciudad</p>";
-        echo "<h3>Resultados anteriores:</h3>";
-        echo "<p><strong>Nombre anterior:</strong> $usuarioAnterior</p>";
-        echo "<p><strong>Idioma anterior:</strong> $idiomaAnterior</p>";
-        echo "<p><strong>Color anterior:</strong><span style='color:{$colorAnterior}'>{$colorAnterior}</p>";
-        echo "<p><strong>Ciudad anterior:</strong> $ciudadAnterior</p>";
+        echo "<p><strong>Número 1:</strong> $num1</p>";
+        echo "<p><strong>Número 2:</strong> $num2</p>";
+        echo "<p><strong>Operación elegida:</strong> $operacion</p>";
+        echo "<p><strong>Resultado:</strong> $resultado</p>";
+
+        echo "<h3>Valores anteriores:</h3>";
+        echo "<p><strong>Número 1 anterior:</strong> $num1Anterior</p>";
+        echo "<p><strong>Número 2 anterior:</strong> $num2Anterior</p>";
+        echo "<p><strong>Operación anterior:</strong> $operacionAnterior</p>";
+        echo "<p><strong>Resultado anterior:</strong> $resultadoAnterior</p>";
     }
 ?>
 
@@ -37,32 +57,24 @@
 </head>
 <body>
     <h1>Iván Espí Asins</h1>
-    <h2>Ejercicio 2</h2>
+    <h2>Ejercicio: Calculadora con Cookies</h2>
 
     <form method="post">
-        <label for="nombre">Introduce tu nombre:</label><br>
-        <input type="text" name="nombre" id="nombre" required>
-        <br><br>
+        <label>Introduce el primer número:</label><br>
+        <input type="number" name="num1" id="num1" required><br><br>
 
-        <label>Preferencia de idioma:</label><br>
-        <select name="idioma" id="idioma">
-            <option value="Español">Español</option>
-            <option value="Inglés">Inglés</option>
-            <option value="Francés">Francés</option>
-            <option value="Italiano">Italiano</option>
+        <label>Introduce el segundo número:</label><br>
+        <input type="number" name="num2" id="num2" required><br><br>
+
+        <label >Selecciona una operación:</label><br>
+        <select name="operacion" id="operacion" required>
+            <option value="suma">Suma</option>
+            <option value="resta">Resta</option>
+            <option value="multiplicacion">Multiplicación</option>
+            <option value="division">División</option>
         </select><br><br>
 
-        <label>Color:</label><br>
-        <input type="color" name="color"><br><br>
-
-        <label>Ciudad:</label><br>
-        <input type="radio" name="ciudad" value="valencia">Valencia<br>
-        <input type="radio" name="ciudad" value="castellon">Castellón<br>
-        <input type="radio" name="ciudad" value="teruel">Teruel<br>
-        <input type="radio" name="ciudad" value="alicante">Alicante<br><br>
-
-
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Calcular">
     </form>
 
 </body>
