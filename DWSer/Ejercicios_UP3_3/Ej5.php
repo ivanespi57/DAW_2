@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iván Espí Asins</title>
-</head>
-<body>
-    <h1>Iván Espí Asins</h1>
-    <hr>
-    <h2>Ejerciio 5</h2>
-
-    <form method="post">
-        <label>Importe:</label>
-        <input type="number" name="importe" required><br><br>
-
-        <input type="radio" name="convertir" value="eurpes" required> Euros a Pesetas<br>
-        <input type="radio" name="convertir" value="peseur" required> Pesetas a Euros<br><br>
-
-        <input type="submit" value="Convertir">
-    </form>
-
-    <?php
+<?php
         $importeAnterior = isset($_COOKIE["importe"]) ? $_COOKIE["importe"] : "Ninguno";
         $tipoAnterior = isset($_COOKIE["tipo"]) ? $_COOKIE["tipo"] : "Ninguno";
         $resultadoAnterior = isset($_COOKIE["resultado"]) ? $_COOKIE["resultado"] : "Ninguno";
@@ -59,5 +38,26 @@
             }
         }
     ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iván Espí Asins</title>
+</head>
+<body>
+    <h1>Iván Espí Asins</h1>
+    <hr>
+    <h2>Ejerciio 5</h2>
+
+    <form method="post">
+        <label>Importe:</label>
+        <input type="number" name="importe" required><br><br>
+
+        <input type="radio" name="convertir" value="eurpes" required> Euros a Pesetas<br>
+        <input type="radio" name="convertir" value="peseur" required> Pesetas a Euros<br><br>
+
+        <input type="submit" value="Convertir">
+    </form>
 </body>
 </html>
