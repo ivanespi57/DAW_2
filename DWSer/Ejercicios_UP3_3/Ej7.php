@@ -18,9 +18,9 @@
 
         echo "<h3>Resultado actual:</h3>";
         if ($clave == $correcta) {
-            echo "<p><strong>✔ Contraseña correcta. Caja fuerte abierta.</strong></p>";
+            echo "<p><strong Contraseña correcta. Caja fuerte abierta.</strong></p>";
         } else {
-            echo "<p><strong>✘ Contraseña incorrecta.</strong></p>";
+            echo "<p><strong>Contraseña incorrecta.</strong></p>";
         }
 
         echo "<p>Contraseña introducida: $clave</p>";
@@ -47,7 +47,7 @@
 <body>
     <h1>Iván Espí Asins</h1>
     <hr>
-    <h2>Ejercicio 7 - Caja Fuerte</h2>
+    <h2>Ejercicio 7</h2>
 
     <form method="post">
         <label>Introduce la contraseña:</label>
