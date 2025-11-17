@@ -11,6 +11,10 @@ del servidor.
 Serviremos una API Rest, programada en PHP, por ahora se plantea con dos únicas
 funciones: 
 
+### Llamar a la API desde el navegador
+
+![alt text](./imgs/Api_navegador.png)
+
 ### Listar todas las aves
 
 ### Listar un ave a partir de un `id_ave` dado
