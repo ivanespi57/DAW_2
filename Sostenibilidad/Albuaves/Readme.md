@@ -1,40 +1,196 @@
-# Albuaves
+# Albuaves (versión corta)
 
-Albuaves es un pequeño proyecto mascota ( *pet-project* ) , que pretende
-de una manera sencilla plantear al alumnado todas las partes implicadas
-en una Solución Software basada en la arquitectura *Cliente-Servidor*.
+Proyecto docente que demuestra:
 
-Por una parte tendremos una base de datos en `SQLite` que editaremos de manera
-sencilla con `sqlitebrowser` y que usaremos como persistencia en el lado 
-del servidor.
+- Una API REST mínima en PHP (`php/api.php`) que usa SQLite (`db/albuaves.db`).
+- Un cliente Java (`java/SearchBirdsAPI.java`) que consume la API y muestra resultados.
 
-Serviremos una API Rest, programada en PHP, por ahora se plantea con dos únicas
-funciones: 
+Evidencia (capturas incluidas en `imgs/`):
 
-### Llamar a la API desde el navegador
+- Llamada API en navegador: `imgs/Api_navegador.png`
+ # Albuaves — README para entrega
 
-![alt text](./imgs/Api_navegador.png)
+Proyecto docente simple que muestra un flujo Cliente-Servidor.
 
-### Listar todas las aves
+Componentes incluidos:
 
-### Listar un ave a partir de un `id_ave` dado
+- API REST en PHP (`php/api.php`) que consulta SQLite (`db/albuaves.db`).
+- Cliente Java (`java/SearchBirdsAPI.java`) que consume la API y formatea salida.
+- Scripts y SQL para crear y poblar la base de datos (`db/`).
 
-## Software Requerido
+Evidencia (colocar en `imgs/`):
 
-* sqlitebrowser
-* php-sqlite3
+- `imgs/Api_navegador.png`  (captura: API en navegador con JSON)
+- `imgs/Java_terminal.png`  (captura: salida del cliente Java en terminal)
 
-### Comandos para la instalación en máquinas de desarrollo
+Software necesario (resumen):
+
+- php, php-sqlite3
+- sqlite3 o sqlitebrowser
+- openjdk (javac, java)
+ # Albuaves — README para entrega
+
+Proyecto docente simple que muestra un flujo Cliente-Servidor.
+
+Componentes incluidos:
+
+- API REST en PHP (`php/api.php`) que consulta SQLite (`db/albuaves.db`).
+- Cliente Java (`java/SearchBirdsAPI.java`) que consume la API y formatea salida.
+- Scripts y SQL para crear y poblar la base de datos (`db/`).
+
+Evidencia (colocar en `imgs/`):
+
+- `imgs/Api_navegador.png`  (captura: API en navegador con JSON)
+- `imgs/Java_terminal.png`  (captura: salida del cliente Java en terminal)
+
+Software necesario (resumen):
+
+- php, php-sqlite3
+- sqlite3 o sqlitebrowser
+- openjdk (javac, java)
+
+Instalación rápida (Ubuntu/Debian):
 
 ```bash
-sudo apt update; sudo apt install sqlitebrowser php-sqlite3
+sudo apt update
+sudo apt install php php-sqlite3 sqlite3 sqlitebrowser openjdk-17-jdk
 ```
 
-## URLs de interés
+Preparar la base de datos:
 
-### JSON.org
+Crear las tablas:
 
-Podemos encontrar más información acerca de JSON.org en la página de 
-GitHub del desarrollador principal.
+ # Albuaves — README para entrega
 
-https://github.com/stleary/JSON-java
+Proyecto docente simple que muestra un flujo Cliente-Servidor.
+
+Componentes incluidos:
+
+- API REST en PHP (`php/api.php`) que consulta SQLite (`db/albuaves.db`).
+- Cliente Java (`java/SearchBirdsAPI.java`) que consume la API y formatea salida.
+- Scripts y SQL para crear y poblar la base de datos (`db/`).
+
+Evidencia (colocar en `imgs/`):
+
+- `imgs/Api_navegador.png`  (captura: API en navegador con JSON)
+- `imgs/Java_terminal.png`  (captura: salida del cliente Java en terminal)
+
+Software necesario (resumen):
+
+- php, php-sqlite3
+- sqlite3 o sqlitebrowser
+- openjdk (javac, java)
+
+Instalación rápida (Ubuntu/Debian):
+
+```bash
+sudo apt update
+sudo apt install php php-sqlite3 sqlite3 sqlitebrowser openjdk-17-jdk
+```
+
+Preparar la base de datos:
+
+Crear las tablas:
+
+ # Albuaves — README para entrega
+
+Proyecto docente simple que muestra un flujo Cliente-Servidor.
+
+Componentes incluidos:
+
+- API REST en PHP (`php/api.php`) que consulta SQLite (`db/albuaves.db`).
+- Cliente Java (`java/SearchBirdsAPI.java`) que consume la API y formatea salida.
+- Scripts y SQL para crear y poblar la base de datos (`db/`).
+
+Evidencia (colocar en `imgs/`):
+
+- `imgs/Api_navegador.png`  (captura: API en navegador con JSON)
+- `imgs/Java_terminal.png`  (captura: salida del cliente Java en terminal)
+
+Software necesario (resumen):
+
+- php, php-sqlite3
+- sqlite3 o sqlitebrowser
+- openjdk (javac, java)
+
+Instalación rápida (Ubuntu/Debian):
+
+```bash
+sudo apt update
+sudo apt install php php-sqlite3 sqlite3 sqlitebrowser openjdk-17-jdk
+```
+
+Preparar la base de datos:
+
+Crear las tablas:
+
+```bash
+sqlite3 db/albuaves.db < db/albuaves-db-create.sql
+```
+
+Poblar con datos de ejemplo:
+
+```bash
+sqlite3 db/albuaves.db < db/albuaves-tables-population.sql
+```
+
+Arrancar la API (script incluido):
+
+```bash
+./run-api-server.sh
+# El script arranca el servidor PHP en 127.0.0.1:9191
+```
+
+Arranque manual (alternativa):
+
+```bash
+cd php
+php -S 127.0.0.1:9191
+```
+
+Pruebas rápidas:
+
+- Todas las aves: http://127.0.0.1:9191/api.php
+- Ave por id:  http://127.0.0.1:9191/api.php?bird_id=1
+
+Con curl:
+
+```bash
+curl "http://127.0.0.1:9191/api.php"
+curl "http://127.0.0.1:9191/api.php?bird_id=1"
+```
+
+Compilar y ejecutar el cliente Java:
+
+```bash
+cd java
+./BuscadorAvesCompiler.sh
+# o manualmente:
+# javac -cp .:json-20250517.jar SearchBirdsAPI.java
+# java -cp .:json-20250517.jar SearchBirdsAPI
+```
+
+Descripción breve de funcionamiento:
+
+- La API responde JSON con la lista de aves o un objeto por `bird_id`.
+- El cliente Java realiza GET a la URL y presenta la información en terminal.
+- Se incluyen jars en `libs/` para parsing JSON si es necesario.
+
+Archivos clave:
+
+- `php/api.php`  — endpoint REST
+- `run-api-server.sh`  — script de arranque
+- `db/albuaves-db-create.sql`  — esquema
+- `db/albuaves-tables-population.sql`  — datos de ejemplo
+- `java/SearchBirdsAPI.java`  — cliente
+- `java/BuscadorAvesCompiler.sh` — compila y ejecuta el cliente
+
+Recomendaciones antes de entregar:
+
+- Añade las dos capturas en `imgs/` con los nombres indicados.
+- Asegúrate de que los scripts son ejecutables (`chmod +x`).
+- Verifica que `db/albuaves.db` se crea correctamente.
+
+Verificación mínima: la API responde 200 y el cliente Java imprime la lista.
+
+
