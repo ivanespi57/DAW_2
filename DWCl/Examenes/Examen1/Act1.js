@@ -1,47 +1,67 @@
-// Pedimos todo
-let nombre = prompt("Introduce tu nombre");
-let nivel = parseInt(prompt("Introduce el nivel"));
-let clase = prompt("Introduce tu clase (Mago o Guerrero)");
-let si = false;
-// Función principal
-function comprobarRequisitos(){
-    //Función que comprueba si el campo esta vacio
-    function noEstaVacio(nombre) {
+//función principal
+function comprobarRequisitos() {
 
-        return nombre !== "" && nombre !== null && nombre !== undefined;
+    let nombre, nivel, clase;
+    let datosValidos = false;
 
+    // funciones para validar
+    function nombreValido(n) {
+        return n !== null && n.trim() !== "";
     }
-    //Función que comprueba si la variable es un entero
-    function esEntero(nivel) {
-        return Number.isInteger(Number(nivel));
 
+    function nivelValido(n) {
+        return Number.isInteger(Number(n));
     }
-    //Función que comprueba si has introducido bien la clase
-    function claseBien(clase){
-        if(clase === "Mago" || clase === "Guerrero"){
-            return si =  true;
-        }else{
-            alert("La clase solo puede ser Mago o Guerrero")
-            return;
+
+    function claseValida(c) {
+        return c === "Mago" || c === "Guerrero";
+    }
+
+    function esMagoElite(nivel) {
+        return nivel > 35;
+    }
+
+    function esGuerreroElite(nivel) {
+        return nivel > 40;
+    }
+
+    // bucle while
+    while (!datosValidos) {
+        //Pedir todo
+        nombre = prompt("Introduce tu nombre:");
+        nivel = parseInt(prompt("Introduce tu nivel:"));
+        clase = prompt("Introduce tu clase (Mago o Guerrero):");
+
+        // Validaciones básicas de entrada
+        if (!nombreValido(nombre)) {
+            alert("El nombre no puede estar vacío.");
+            continue;
         }
-    }
-    //Función que comprueba si la clase coincide con su nivel mínimo
-    function nivelClase(clase, nivel){
-        
-        if(clase === "Mago" && nivel < 35){
-            alert("Si eres Mago tu nivel debe de ser mayor a 35")
-            return;
+
+        if (!nivelValido(nivel)) {
+            alert("El nivel debe ser un número entero.");
+            continue;
         }
 
-        if(clase === "Guerrero" && nivel < 40){
-            alert("Si eres Guerrero, tu nivel tiene que ser mayor a 40");
-            return;
+        if (!claseValida(clase)) {
+            alert("La clase debe ser Mago o Guerrero.");
+            continue;
         }
+
+        datosValidos = true;
     }
-    //Llamamos a las funciones
-    noEstaVacio(nombre);
-    esEntero(nivel);
-    claseBien(clase);
-    nivelClase(clase,nivel);
+
+    if (clase === "Mago" && esMagoElite(nivel)) {
+        alert("ACCESO CONCEDIDO. Eres un Mago ÉLITE.");
+    }
+
+    else if (clase === "Guerrero" && esGuerreroElite(nivel)) {
+        alert("ACCESO CONCEDIDO. Eres un Guerrero ÉLITE.");
+    }
+
+    else {
+        alert("ACCESO DENEGADO. Nivel insuficiente para misiones ÉLITE.");
+    }
 }
+// Llamar a la función
 comprobarRequisitos();
