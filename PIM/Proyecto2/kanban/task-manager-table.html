@@ -5,234 +5,220 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor de Tareas</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Inter", sans-serif;
+        background: #0f0f13;
+        color: #eaeaea;
+        padding: 30px;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.04);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        box-shadow: 0 0 30px rgba(0, 255, 200, 0.1);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .header {
+        padding: 35px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .header h1 {
+        font-size: 2.2em;
+        color: #5df2d6;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .header p {
+        margin-top: 8px;
+        font-size: 0.95em;
+        opacity: 0.75;
+    }
+
+    .table-container {
+        padding: 25px;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 650px;
+    }
+
+    thead {
+        background: rgba(255,255,255,0.05);
+    }
+
+    th {
+        padding: 14px 10px;
+        text-align: left;
+        font-weight: 600;
+        color: #7df6dd;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        font-size: 0.85em;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        color: #e5e5e5;
+        vertical-align: top;
+    }
+
+    tr:hover:not(.new-row) {
+        background: rgba(255,255,255,0.05);
+    }
+
+    .new-row {
+        background: rgba(0,255,200,0.05);
+    }
+
+    textarea, select {
+        width: 100%;
+        padding: 8px;
+        border-radius: 6px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #eaeaea;
+        font-size: 14px;
+        resize: none;
+    }
+
+    textarea:focus, select:focus {
+        outline: none;
+        border-color: #5df2d6;
+        box-shadow: 0 0 6px #2bbfa5;
+    }
+
+    .view-mode {
+        padding: 8px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: 0.2s;
+    }
+
+    .view-mode:hover {
+        background: rgba(255,255,255,0.05);
+    }
+
+    .status-badge, .priority-badge {
+        padding: 6px 14px;
+        border-radius: 25px;
+        font-size: 0.85em;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    /* STATUS */
+    .status-someday { background: #394a6d; color: #9fc1ff; }
+    .status-todo { background: #6b3d2d; color: #ffb48a; }
+    .status-progress { background: #244c39; color: #7fffd4; }
+    .status-done { background: #473d54; color: #d7b5ff; }
+    .status-today { background: #1a4636; color: #5df2d6; }
+    .status-thisweek { background: #5c2f47; color: #ff96d7; }
+    .status-deleted { background: #4b2f3a; color: #ff6f91; }
+    .status-tomorrow { background: #4a4d2d; color: #eaff6d; }
+
+    /* PRIORITY */
+    .priority-low { background: #244c39; color: #7fffd4; }
+    .priority-medium { background: #6b3d2d; color: #ffb48a; }
+    .priority-high { background: #4e2d2d; color: #ff6f6f; }
+    .priority-top { background: #4b0040; color: #ff73ff; }
+
+    .actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.85em;
+        transition: 0.25s;
+    }
+
+    .btn-save {
+        background: #5df2d6;
+        color: #0f0f13;
+    }
+
+    .btn-save:hover {
+        background: #34d7b9;
+        transform: translateY(-2px);
+    }
+
+    .btn-delete {
+        background: #ff6f91;
+        color: #0f0f13;
+    }
+
+    .btn-delete:hover {
+        background: #ff547d;
+        transform: translateY(-2px);
+    }
+
+    .btn-cancel {
+        background: #777;
+        color: white;
+    }
+
+    .btn-cancel:hover {
+        background: #555;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 40px;
+        color: #5df2d6;
+        font-size: 1.2em;
+    }
+
+    .error {
+        background: rgba(255,0,0,0.1);
+        color: #ff6f91;
+        padding: 15px;
+        margin: 20px;
+        border-left: 4px solid #ff6f91;
+        border-radius: 4px;
+    }
+
+    @media (max-width: 750px) {
+        th, td {
+            padding: 10px 6px;
+            font-size: 0.8em;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #e0e7ff 0%, #f0f4f8 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            background: #f8f9fa;
-            color: #343a40;
-            padding: 30px;
-            text-align: center;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        .header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            padding: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 600px;
-        }
-
-        thead {
-            background: #f8f9fa;
-        }
-
-        th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            color: #495057;
-            border-bottom: 2px solid #dee2e6;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e9ecef;
-            vertical-align: top;
-        }
-
-        tr:hover:not(.new-row) {
-            background: #f8f9ff;
-        }
-
-        .new-row {
-            background: #f0f8ff;
-        }
-
-        textarea, select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 14px;
-            resize: none;
-            overflow: hidden;
-            transition: border-color 0.3s;
-        }
-
-        textarea:focus, select:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-
-        .view-mode {
-            min-height: 40px;
-            padding: 8px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background 0.2s;
-            word-wrap: break-word;
-        }
-
-        .view-mode:hover {
-            background: #e9ecef;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 500;
-        }
-
-        .status-someday { background: #e3f2fd; color: #1976d2; }
-        .status-todo { background: #fff3e0; color: #f57c00; }
-        .status-progress { background: #e8f5e9; color: #388e3c; }
-        .status-done { background: #f3e5f5; color: #7b1fa2; }
-        .status-today { background: #e3f2fd; color: #68ff7c; }
-        .status-thisweek { background: #fff3e0; color: #ff96d7; }
-        .status-deleted { background: #e8f5e9; color: #955ea3; }
-        .status-tomorrow { background: #f3e5f5; color: #e0ff6f; }
-
-        .priority-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 500;
-        }
-
-        .priority-low { background: #e8f5e9; color: #2e7d32; }
-        .priority-medium { background: #fff3e0; color: #ef6c00; }
-        .priority-high { background: #ffebee; color: #c62828; }
-        .priority-top { background: #ffebee; color: #a8ff61; }
 
         .actions {
-            display: flex;
-            gap: 8px;
+            flex-direction: column;
         }
 
         button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85em;
-            font-weight: 500;
-            transition: all 0.3s;
+            width: 100%;
         }
+    }
+</style>
 
-        .btn-save {
-            background: #6366f1;
-            color: white;
-        }
-
-        .btn-save:hover {
-            background: #4f46e5;
-            transform: translateY(-1px);
-        }
-
-        .btn-delete {
-            background: #ef5350;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background: #e53935;
-            transform: translateY(-1px);
-        }
-
-        .btn-cancel {
-            background: #9e9e9e;
-            color: white;
-        }
-
-        .btn-cancel:hover {
-            background: #757575;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #6366f1;
-            font-size: 1.2em;
-        }
-
-        .error {
-            background: #ffebee;
-            color: #c62828;
-            padding: 15px;
-            margin: 20px;
-            border-radius: 4px;
-            border-left: 4px solid #c62828;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.5em;
-            }
-
-            th, td {
-                padding: 10px 8px;
-                font-size: 0.85em;
-            }
-
-            .actions {
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-
-            .table-container {
-                padding: 10px;
-            }
-
-            table {
-                min-width: 500px;
-            }
-        }
     </style>
 </head>
 <body>
