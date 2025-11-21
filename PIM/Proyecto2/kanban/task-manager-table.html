@@ -123,6 +123,10 @@
         .status-todo { background: #fff3e0; color: #f57c00; }
         .status-progress { background: #e8f5e9; color: #388e3c; }
         .status-done { background: #f3e5f5; color: #7b1fa2; }
+        .status-today { background: #e3f2fd; color: #68ff7c; }
+        .status-thisweek { background: #fff3e0; color: #ff96d7; }
+        .status-deleted { background: #e8f5e9; color: #955ea3; }
+        .status-tomorrow { background: #f3e5f5; color: #e0ff6f; }
 
         .priority-badge {
             display: inline-block;
@@ -135,6 +139,7 @@
         .priority-low { background: #e8f5e9; color: #2e7d32; }
         .priority-medium { background: #fff3e0; color: #ef6c00; }
         .priority-high { background: #ffebee; color: #c62828; }
+        .priority-top { background: #ffebee; color: #a8ff61; }
 
         .actions {
             display: flex;
@@ -318,6 +323,10 @@
                             <option value="To do" ${task?.status === 'To do' ? 'selected' : ''}>To do</option>
                             <option value="In progress" ${task?.status === 'In progress' ? 'selected' : ''}>In progress</option>
                             <option value="Done" ${task?.status === 'Done' ? 'selected' : ''}>Done</option>
+                            <option value="Today" ${task?.status === 'Today' ? 'selected' : ''}>Today</option>
+                            <option value="Tomorrow" ${task?.status === 'Tomorrow' ? 'selected' : ''}>Tomorrow</option>
+                            <option value="Deleted" ${task?.status === 'Deleted' ? 'selected' : ''}>Deleted</option>
+                            <option value="Someday" ${task?.status === 'Someday' ? 'selected' : ''}>Some day</option>
                         </select>
                     </td>
                     <td>
@@ -325,6 +334,7 @@
                             <option value="low" ${task?.priority === 'low' ? 'selected' : ''}>Low</option>
                             <option value="medium" ${task?.priority === 'medium' ? 'selected' : ''}>Medium</option>
                             <option value="high" ${task?.priority === 'high' ? 'selected' : ''}>High</option>
+                            <option value="top" ${task?.priority === 'top' ? 'selected' : ''}>Top</option>
                         </select>
                     </td>
                     <td>

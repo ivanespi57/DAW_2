@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS tasks (
                 'Tomorrow', 
                 'Today', 
                 'In progress',
+                'To do',
                 'Done') DEFAULT 'Some day',
     priority ENUM('top',
                   'high', 
