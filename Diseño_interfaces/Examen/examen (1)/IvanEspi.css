@@ -1,0 +1,173 @@
+*{
+    font-family: sans-serif;
+}
+
+header{
+    position: sticky;
+    width: 95%;
+    height: 50%;
+    top: 0;
+}
+
+#main-header{
+    background-color: rgb(31, 143, 137);
+    padding: 40px;
+    padding-top: 10px;
+    color: white;   
+}
+
+.main-nav li{
+    float: right;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+.main-nav a {
+    float: right;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    padding-right: 30px;
+}
+
+a:hover{
+    color: green;
+}
+
+.profile-card {
+    float: left;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.skills{
+    margin-top: 90px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.skills li[data-level^=ad]{
+    background-color: rgb(136, 233, 127);
+    padding: 7px;
+}
+
+.skills li[data-level^=in]{
+    background-color: rgb(227, 245, 126);
+    padding: 7px;
+}
+
+.skills li[data-level^=be]{
+    background-color: rgb(218, 105, 105);
+    padding: 7px;
+}
+
+.sidebar {
+    float: left;
+    width: 220px;
+    background: #f0f0f0;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin: 10px 0;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+}
+
+.social-link:hover{
+    color: rgb(26, 151, 151);
+}
+
+.social-link:visited{
+    color: rgb(255, 0, 13);
+}
+
+.social-link:active{
+    color: green;
+}
+
+a[title^=Twi]{
+    background-color: rgb(60, 173, 248);
+}
+
+a[title^=Lin]{
+    background-color: rgb(123, 84, 146);
+}
+
+a[title^=Git]{
+    background-color: rgb(171, 187, 82);
+}
+
+.content {
+    margin-left: 500px;
+    padding: 20px;
+}
+
+#inicio{
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    width: 800px;
+}
+
+.quote {
+    background-color: aquamarine;
+    padding: 20px
+}
+
+#proyectos{
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    width: 800px;
+}
+
+.project-card{
+    background-color: rgb(225, 245, 239);
+
+}
+
+.project-btn{
+    background-color: rgb(17, 142, 245);
+    padding: 10px;
+}
+
+.project-btn:hover{
+    background-color: rgb(231, 185, 125);
+}
+
+.main-footer {
+    clear: both;
+    background-color: rgb(31, 143, 137);
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+@media (max-width: 420px) {
+    .sidebar {    
+        
+    }
+}
