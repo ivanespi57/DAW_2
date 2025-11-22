@@ -1,0 +1,6 @@
+/* Estilos básicos placeholder. Reemplazar con styles extraído si se desea. */
+:root{ --bg:#0f0f13; --accent:#5df2d6; --muted:#eaeaea }
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--muted);margin:0;padding:20px}
+
+.container{max-width:1100px;margin:0 auto}
