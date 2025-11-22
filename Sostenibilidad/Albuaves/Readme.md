@@ -69,7 +69,7 @@ curl "http://127.0.0.1:9191/api.php?bird_id=1"
 
 ## Capturas
 
-![Captura](./imgs/Java_terminal.png)
+![Captura](./imgs/java_terminal.png)
 
 ![Captura](./imgs/Api_navegador.png)
 
