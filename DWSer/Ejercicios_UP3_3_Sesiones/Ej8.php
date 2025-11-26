@@ -1,59 +1,61 @@
 <?php
+    session_start();
 
-    $correcta = "1234";
+    $zona_anterior = isset($_COOKIE["zona_anterior"]) ? $_COOKIE["zona_anterior"] : "No hay datos";
+    $hora_anterior = isset($_COOKIE["hora_anterior"]) ? $_COOKIE["hora_anterior"] : "No hay datos";
 
-    $intentos = isset($_COOKIE["intentos"]) ? $_COOKIE["intentos"] : 0;
-    $anteriores = isset($_COOKIE["anteriores"]) ? unserialize($_COOKIE["anteriores"]) : [];
+    $zonas = [
+        "Europe/Madrid",
+        "Europe/London",
+        "America/New_York",
+        "America/Los_Angeles",
+        "Asia/Tokyo"
+    ];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $clave = $_POST["clave"];
+        $zona = $_POST["zona"];
 
-        $anteriores[] = $clave;
+        $_SESSION["zona_actual"] = $zona;
 
-        $intentos++;
+        date_default_timezone_set($zona);
+        $_SESSION["hora_actual"] = date("H:i:s");
 
-        setcookie("intentos", $intentos, time() + 3600);
-        setcookie("anteriores", serialize($anteriores), time() + 3600);
+        setcookie("zona_anterior", $zona, time() + 3600);
+        setcookie("hora_anterior", $_SESSION["hora_actual"], time() + 3600);
 
-        echo "<h3>Resultado actual:</h3>";
-        if ($clave == $correcta) {
-            echo "<p><strong Contraseña correcta. Caja fuerte abierta.</strong></p>";
-        } else {
-            echo "<p><strong>Contraseña incorrecta.</strong></p>";
-        }
+        echo "<h3>Resultado actual (Sesión):</h3>";
+        echo "<p><strong>Zona horaria actual:</strong> $zona</p>";
+        echo "<p><strong>Hora actual:</strong> " . $_SESSION["hora_actual"] . "</p>";
 
-        echo "<p>Contraseña introducida: $clave</p>";
-
-        echo "<h3>Datos almacenados (Cookies):</h3>";
-        echo "<p><strong>Contraseña correcta:</strong> $correcta</p>";
-        echo "<p><strong>Número de intentos:</strong> $intentos</p>";
-
-        echo "<p><strong>Contraseñas ya introducidas:</strong></p>";
-        echo "<ul>";
-        foreach ($anteriores as $c) {
-            echo "<li>$c</li>";
-        }
-        echo "</ul>";
+        echo "<h3>Datos de la ejecución anterior (Cookies):</h3>";
+        echo "<p><strong>Zona horaria anterior:</strong> $zona_anterior</p>";
+        echo "<p><strong>Hora anterior:</strong> $hora_anterior</p>";
     }
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iván Espí Asins</title>
-</head>
-<body>
-    <h1>Iván Espí Asins</h1>
-    <hr>
-    <h2>Ejercicio 7</h2>
+    <head>
+        <meta charset="UTF-8">
+        <title>Ejercicio 8 - Iván Espí Asins</title>
+    </head>
+    <body><
+        <h1>Iván Espí Asins</h1>
+        <hr>
+        <h2>Ejercicio 8</h2>
 
-    <form method="post">
-        <label>Introduce la contraseña:</label>
-        <input type="password" name="clave" required>
-        <br><br>
-        <input type="submit" value="Comprobar">
-    </form>
-</body>
+        <form method="post">
+            <label>Selecciona zona horaria:</label>
+            <select name="zona" required>
+                <?php
+                    foreach ($zonas as $z) {
+                        echo "<option value='$z'>$z</option>";
+                    }
+                ?>
+            </select>
+            <br><br>
+            <input type="submit" value="Mostrar hora">
+        </form>
+    </body>
 </html>

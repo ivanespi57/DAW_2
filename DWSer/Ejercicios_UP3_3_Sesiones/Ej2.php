@@ -34,39 +34,39 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iván Espí Asins</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Iván Espí Asins</title>
+    </head>
+    <body>
 
-<h1>Iván Espí Asins</h1>
-<h2>Ejercicio 2 con Sesión</h2>
+    <h1>Iván Espí Asins</h1>
+    <h2>Ejercicio 2 con Sesión</h2>
 
-<form method="post">
-    <label for="nombre">Introduce tu nombre:</label><br>
-    <input type="text" name="nombre" id="nombre" required>
-    <br><br>
+    <form method="post">
+        <label for="nombre">Introduce tu nombre:</label><br>
+        <input type="text" name="nombre" id="nombre" required>
+        <br><br>
 
-    <label>Preferencia de idioma:</label><br>
-    <select name="idioma" id="idioma">
-        <option value="Español">Español</option>
-        <option value="Inglés">Inglés</option>
-        <option value="Francés">Francés</option>
-        <option value="Italiano">Italiano</option>
-    </select><br><br>
+        <label>Preferencia de idioma:</label><br>
+        <select name="idioma" id="idioma">
+            <option value="Español">Español</option>
+            <option value="Inglés">Inglés</option>
+            <option value="Francés">Francés</option>
+            <option value="Italiano">Italiano</option>
+        </select><br><br>
 
-    <label>Color:</label><br>
-    <input type="color" name="color"><br><br>
+        <label>Color:</label><br>
+        <input type="color" name="color"><br><br>
 
-    <label>Ciudad:</label><br>
-    <input type="radio" name="ciudad" value="Valencia">Valencia<br>
-    <input type="radio" name="ciudad" value="Castellón">Castellón<br>
-    <input type="radio" name="ciudad" value="Teruel">Teruel<br>
-    <input type="radio" name="ciudad" value="Alicante">Alicante<br><br>
+        <label>Ciudad:</label><br>
+        <input type="radio" name="ciudad" value="Valencia">Valencia<br>
+        <input type="radio" name="ciudad" value="Castellón">Castellón<br>
+        <input type="radio" name="ciudad" value="Teruel">Teruel<br>
+        <input type="radio" name="ciudad" value="Alicante">Alicante<br><br>
 
-    <input type="submit" value="Enviar">
-</form>
+        <input type="submit" value="Enviar">
+    </form>
 
-</body>
+    </body>
 </html>

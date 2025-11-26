@@ -67,20 +67,20 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iván Espí Asins</title>
-</head>
-<body>
-    <h1>Iván Espí Asins</h1>
-    <hr>
-    <h2>Ejercicio 7</h2>
+    <head>
+        <meta charset="UTF-8">
+        <title>Iván Espí Asins</title>
+    </head>
+    <body>
+        <h1>Iván Espí Asins</h1>
+        <hr>
+        <h2>Ejercicio 7</h2>
 
-    <form method="post">
-        <label>Introduce la contraseña:</label>
-        <input type="password" name="clave" required>
-        <br><br>
-        <input type="submit" value="Comprobar">
-    </form>
-</body>
+        <form method="post">
+            <label>Introduce la contraseña:</label>
+            <input type="password" name="clave" required>
+            <br><br>
+            <input type="submit" value="Comprobar">
+        </form>
+    </body>
 </html>
