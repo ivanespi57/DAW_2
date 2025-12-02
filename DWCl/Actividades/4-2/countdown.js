@@ -24,4 +24,3 @@ function iniciarCuentaAtras() {
 }
 
 setInterval(iniciarCuentaAtras, 1000);
-iniciarCuentaAtras();
