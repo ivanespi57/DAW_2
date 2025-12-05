@@ -35,7 +35,7 @@ function actualizarTiempo() {
 
     if (segundosRestantes <= 10) {
         contenedor.classList.add("finalizado");
-        estado.textContent = "⚠️ ¡Tiempo crítico!";
+        estado.textContent = "Tiempo crítico";
     } 
     else if (segundosRestantes <= 180) {
         contenedor.classList.add("alerta");
