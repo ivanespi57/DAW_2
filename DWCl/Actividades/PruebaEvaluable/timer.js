@@ -1,12 +1,11 @@
 const minutosInput = document.getElementById('minutos-input');
-const iniciarBtn = document.getElementById('boton-control');
-const temporizadorDisplay = document.getElementById('tiempo');
+const iniBtn = document.getElementById('boton-control');
+const temp = document.getElementById('tiempo');
 const contenedor = document.getElementById("temporizador");
 const estado = document.getElementById("estado");
 
-let intervalo;
-let tiempoRestante;
-
+let intervalo = null;
+let tiempoRestante = 0;
 
 function formatearTiempo(segundos) {
     const minutos = Math.floor(segundos / 60);
@@ -15,42 +14,87 @@ function formatearTiempo(segundos) {
     return `${String(minutos).padStart(2, '0')}:${String(segundosRestantes).padStart(2, '0')}`;
 }
 
-iniciarBtn.addEventListener('click', () => {
-    minutosInput.disabled = true;
-    iniciarBtn.disabled = true;
+function actualizarTiempo() {
 
-    if (intervalo) {
-        clearInterval(intervalo);
+    tiempoRestante--;
+    temp.textContent = formatearTiempo(tiempoRestante);
+
+    if (tiempoRestante <= 10) {
+        contenedor.classList.add("finalizado");
+        contenedor.classList.remove("alerta");
+        estado.textContent = "Tiempo crítico";
+    }
+    else if (tiempoRestante <= 180) {
+        contenedor.classList.add("alerta");
+        contenedor.classList.remove("finalizado");
+        estado.textContent = "Atención: quedan menos de 3 minutos";
+    }
+    else {
+        contenedor.classList.remove("alerta", "finalizado");
+        estado.textContent = "Sesión en progreso…";
     }
 
-    const minutos = parseInt(minutosInput.value);
+    if (tiempoRestante <= 0) {
+        clearInterval(intervalo);
+        intervalo = null;
 
-    tiempoRestante = minutos * 60;
-    temporizadorDisplay.textContent = formatearTiempo(tiempoRestante);
+        estado.textContent = "La sesión ha finalizado";
+        iniBtn.textContent = "Reiniciar";
+        minutosInput.disabled = false;
+    }
+}
 
+iniBtn.addEventListener('click', () => {
 
-    intervalo = setInterval(() => {
-        tiempoRestante--;
-        temporizadorDisplay.textContent = formatearTiempo(tiempoRestante);
-        if (tiempoRestante <= 10) {
-        contenedor.classList.add("finalizado");
-        estado.textContent = "Tiempo crítico";
-        } 
-        else if (tiempoRestante <= 180) {
-            contenedor.classList.add("alerta");
-            estado.textContent = "Atención: quedan menos de 3 minutos";
-        } 
-        else if (tiempoRestante > 180){
-            contenedor.classList.remove("alerta", "finalizado");
-            estado.textContent = "Sesión en progreso…";
-        }
+    if (intervalo === null && iniBtn.textContent === "Iniciar Sesión") {
 
-        if (tiempoRestante <= 0) {
-            clearInterval(intervalo);
-            estado.textContent = "¡La sesión ha finalizado!";
-            boton.textContent = "Reiniciar";
-            minutosInput.disabled = false;
-            return;
-        }
-    }, 1000);
+        const minutos = parseInt(minutosInput.value);
+
+        tiempoRestante = minutos * 60;
+        temp.textContent = formatearTiempo(tiempoRestante);
+
+        minutosInput.disabled = true;
+
+        iniBtn.textContent = "Pausar Sesión";
+
+        intervalo = setInterval(actualizarTiempo, 1000);
+    } else if (intervalo !== null && iniBtn.textContent === "Pausar Sesión") {
+        
+        pausarBtn();
+
+    } else if (intervalo === null && iniBtn.textContent === "Reanudar Sesión") {
+        
+        reanudarBtn();
+
+    } else if (iniBtn.textContent === "Reiniciar") {
+
+        reiniciarBtn();
+    }
+
 });
+
+function pausarBtn() {
+    clearInterval(intervalo);
+    intervalo = null;
+
+    estado.textContent = "Sesión en pausa";
+    iniBtn.textContent = "Reanudar Sesión";
+}
+
+function reanudarBtn() {
+    estado.textContent = "Sesión en progreso…";
+    iniBtn.textContent = "Pausar Sesión";
+
+    intervalo = setInterval(actualizarTiempo, 1000);
+}
+
+function reiniciarBtn(){
+    contenedor.classList.remove("alerta", "finalizado");
+    estado.textContent = "Sesión preparada";
+    
+    const minutos = parseInt(minutosInput.value);
+    tiempoRestante = minutos * 60;
+    temp.textContent = formatearTiempo(tiempoRestante);
+    
+    iniBtn.textContent = "Iniciar Sesión";
+}

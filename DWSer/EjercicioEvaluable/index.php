@@ -54,7 +54,7 @@
 
             if (!in_array($ext, $extensionesValidas)) {
                 $err["foto"] = "Extensión no válida. Solo jpg, png o gif.";
-            } elseif ($fotoTam > 50 * 1024) {
+            } elseif ($fotoTam > 50 * 1000) {
                 $err["foto"] = "El tamaño máximo es 50 KB.";
             } else {
 
@@ -88,6 +88,15 @@
 
         <h2>Formulario de datos personales</h2>
         <hr>
+        <ul>
+            <li style="color:red"><?= $err["nom"] ?? "" ?></li><br>
+            <li style="color:red"><?= $err["pass"] ?? "" ?></li><br>
+            <li style="color:red"><?= $err["est"] ?? "" ?></li><br>
+            <li style="color:red"><?= $err["nac"] ?? "" ?></li><br>
+            <li style="color:red"><?= $err["idi"] ?? "" ?></li><br>
+            <li style="color:red"><?= $err["email"] ?? "" ?></li><br>
+            <li style="color:red"><?= $err["foto"] ?? "" ?></li><br>
+        </ul>
 
         <form method="POST" action="index.php" enctype="multipart/form-data">
 
@@ -120,26 +129,15 @@
             <input type="checkbox" name="idi[]" value="Italiano"<?= in_array("Italiano",$idi) ? "checked" : "" ?>> Italiano<br><br>
 
             <label>Email</label><br>
-            <input type="email" name="email" value="<?= $email ?>"><br><br>
+            <input type="text" name="email" value="<?= $email ?>"><br><br>
 
             <label>Adjuntar foto</label><br>
             <input type="file" name="foto" accept=".jpg,.png,.gif"><br><br>
-            <span style="color:red"><?= $err["foto"] ?? "" ?></span><br><br>
 
             <input type="reset" name="limpiar" value="Limpiar">
             <input type="submit" name="validar" value="Validar">
             <input type="submit" name="enviar" value="Enviar" formaction="resultado.php">
 
         </form>
-        <ul>
-            <li style="color:red"><?= $err["nom"] ?? "" ?></li><br>
-            <li style="color:red"><?= $err["pass"] ?? "" ?></li><br>
-            <li style="color:red"><?= $err["est"] ?? "" ?></li><br>
-            <li style="color:red"><?= $err["nac"] ?? "" ?></li><br>
-            <li style="color:red"><?= $err["idi"] ?? "" ?></li><br>
-            <li style="color:red"><?= $err["email"] ?? "" ?></li><br>
-        </ul>
-
-
     </body>
 </html>
