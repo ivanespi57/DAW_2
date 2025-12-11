@@ -1,8 +1,0 @@
-CREATE DATABASE IF NOT EXISTS login CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE login;
-
-CREATE TABLE IF NOT EXISTS usuarios (
-  user VARCHAR(50) PRIMARY KEY,
-  password VARCHAR(255) NOT NULL,
-  codigo VARCHAR(20) NOT NULL
-);
