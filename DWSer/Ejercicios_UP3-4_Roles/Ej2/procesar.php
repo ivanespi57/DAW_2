@@ -1,22 +1,29 @@
 <?php
-session_start();
+    session_start();
 
-$_SESSION['usuario'] = $_POST['usuario'];
-$_SESSION['rol'] = $_POST['rol'];
-$_SESSION['salarios'] = $_POST['salarios'];
+    $_SESSION['nombre'] = $_POST['nombre'];
+    $_SESSION['apellido'] = $_POST['apellido'];
+    $_SESSION['asigna'] = $_POST['asigna'];
+    $_SESSION['grupo'] = $_POST['grupo'];
+    $_SESSION['edad'] = $_POST['edad'];
+    $_SESSION['cargo'] = $_POST['cargo'];
 
-switch ($_SESSION['rol']) {
-    case 'Director':
+    if ($_SESSION['edad'] == "mayor" && $_SESSION['cargo'] == "con") {
+        $_SESSION['rol'] = "Director";
         header("Location: director.php");
-        break;
-    case 'Delegado':
-        header("Location: delegado.php");
-        break;
-    case 'Profesor':
+        exit;
+    } elseif ($_SESSION['edad'] == "mayor" && $_SESSION['cargo'] == "sin") {
+        $_SESSION['rol'] = "Profesor";
         header("Location: profesor.php");
-        break;
-    case 'Estudiante':
+        exit;
+    } elseif ($_SESSION['edad'] == "menor" && $_SESSION['cargo'] == "con") {
+        $_SESSION['rol'] = "Delegado";
+        header("Location: delegado.php");
+        exit;
+    } else {
+        $_SESSION['rol'] = "Estudiante";
         header("Location: estudiante.php");
-        break;
-}
-exit;
+        exit;
+    }
+
+?>
