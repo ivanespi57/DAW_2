@@ -34,43 +34,45 @@ for(let i = 2015; i <= 2025; i++){
     anyo.appendChild(op);
 }
 
-// Evento para el selector de marca
 marca.addEventListener('change', (e) => {
- // Guardamos el valor seleccionado en nuestro objeto global
+
  datosBusqueda.marca = e.target.value;
- // IMPORTANTE: Cada vez que el usuario cambie algo,
- // debemos volver a filtrar para actualizar los resultados
+
  filtrarCoche();
 });
-// Evento para el selector de año
+
 anyo.addEventListener('change', (e) => {
  datosBusqueda.anyo = e.target.value;
 
- filtrarCoche(); // *Paso 5
+ filtrarCoche();
 });
-// Repetir para el resto de selectores... 
+
 min.addEventListener('change', (e) => {
  datosBusqueda.min = e.target.value;
 
- filtrarCoche(); // *Paso 5
+ filtrarCoche();
 });
+
 max.addEventListener('change', (e) => {
  datosBusqueda.max = e.target.value;
 
- filtrarCoche(); // *Paso 5
+ filtrarCoche();
 });
+
 puertas.addEventListener('change', (e) => {
  datosBusqueda.puertas = e.target.value;
 
- filtrarCoche(); // *Paso 5
+ filtrarCoche();
 });
+
 trans.addEventListener('change', (e) => {
  datosBusqueda.trans = e.target.value;
 
- filtrarCoche(); // *Paso 5
+ filtrarCoche(); 
 });
+
 color.addEventListener('change', (e) => {
  datosBusqueda.color = e.target.value;
 
- filtrarCoche(); // *Paso 5
+ filtrarCoche(); 
 });
