@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
     echo("
         <h1>Iván Espí Asins - DAW2</h1>
@@ -16,10 +17,6 @@
 
     echo "<p>Los tipos de alojamiento que quieres son: " . implode(", ", $_POST["tipoAloj"]) . "</p>";
     echo "<p>Las preferencias de servicios que prefieres son: " . implode(", ", $_POST["serv"]) . "</p>";
-
-    if (!empty($_FILES["foto"])) {
-        echo "<p>Tu foto:</p><img src='" . $_FILES["foto"] . "' width='150' style='border-radius:10px;'><br><br>";
-    }
 
     echo("<form action='index.php' method='get'>
             <button type='submit'>Volver</button>

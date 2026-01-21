@@ -1,12 +1,15 @@
 <?php
-
+    // Comenzamos la sesión
     session_start();
 
+    //Añadimos el token
     if (!isset($_SESSION['token'])) {
         $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(24));
     }
-    
+    //Importa el fichero de validaciones
     require_once 'validaciones.php';
+
+    //Variables
     $err[] = "";
     $usu = "";
     $pass = "";
@@ -23,6 +26,7 @@
     $directorio = "uploads/";
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
+        //Recoge los datos
         $usu = isset($_POST['usu']) ? $_POST['usu'] : null;
         $pass = isset($_POST['pass']) ? $_POST['pass'] : null;
         $nom =  isset($_POST['nom']) ? $_POST['nom'] : null;
@@ -39,7 +43,7 @@
         if (!is_array($serv)){
             $serv = [];
         }  
-        $email = isset($_POST['nom']) ? $_POST['nom'] : null;
+        $email = isset($_POST['email']) ? $_POST['email'] : null;
 
         if (!validaRequerido($nom)) { //Valida que el campo nombre no esté vacío.
             $err[] = 'El campo nombre es incorrecto.';
@@ -53,16 +57,18 @@
         if (!validaNumero($CP)) { //Valida que el campo CP sea correcto.
             $err[] = 'El campo CP es incorrecto.';
         }
+        // Valida que la contraseña tenga 6 carácteres
         if (strlen($pass) < 6) {
             $err["pass"] = "La contraseña debe tener al menos 6 caracteres.";
         }
+        //Valida si has seleccionado los Arrays
         if (empty($tipoAloj)) {
             $err["tipoAloj"] = "Selecciona al menos un tipo de alojamiento.";
         }
         if (empty($serv)) {
             $err["serv"] = "Selecciona al menos una preferencia de servicio.";
         }
-
+        // Valida si la foto esta subida
         if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] == UPLOAD_ERR_OK) {
             $fotoTmp = $_FILES["foto"]["tmp_name"];
             $fotoNombre = $_FILES["foto"]["name"];
@@ -71,27 +77,6 @@
             $partes = explode(".", $fotoNombre);
             $ext = strtolower(end($partes));
 
-            $extensionesValidas = ["jpg", "png", "gif"];
-
-            if (!in_array($ext, $extensionesValidas)) {
-                $err["foto"] = "Extensión no válida. Solo jpg, png o gif.";
-            } elseif ($fotoTam > 50 * 1000) {
-                $err["foto"] = "El tamaño máximo es 50 KB.";
-            } else {
-
-                if (!is_dir($directorio)) {
-                    mkdir($directorio, 0777, true);
-                }
-
-                $fotoNuevoNombre = uniqid("foto_") . "." . $ext;
-                $rutaDestino = $directorio . $fotoNuevoNombre;
-
-                if (!move_uploaded_file($fotoTmp, $rutaDestino)) {
-                    $err["foto"] = "Error al subir la foto.";
-                } else {
-                    $foto = $rutaDestino;
-                }
-            }
         } else {
             $err["foto"] = "Debes subir una foto.";
         }
@@ -105,16 +90,19 @@
         <title>Formulario - Iván Espí Asins</title>
     </head>
     <body>
-
+        
         <h2>SENIATOURS</h2>
         <hr>
+        <!--Para mostrar los errores en una lista en rojo-->
         <?php if ($err): ?>
             <ul style="color: #f00;">
             <?php foreach ($err as $erro): ?>
             <li> <?php echo $erro ?> </li>
             <?php endforeach; ?>
             </ul>
-        <?php endif; ?>
+            
+        <?php  endif; echo(var_dump($nom))?>
+            
 
         <form method="POST" action="alumno.php" enctype="multipart/form-data">
             
@@ -156,7 +144,7 @@
             <input type="checkbox" name="serv[]" value="Piscina"  <?= in_array("Piscina",  $serv) ? "checked" : "" ?>> Piscina<br>
             <input type="checkbox" name="serv[]" value="Parking" <?= in_array("Parking", $serv) ? "checked" : "" ?>> Parking<br>
             <input type="checkbox" name="serv[]" value="Parque infantil"  <?= in_array("Parque infantil",  $serv) ? "checked" : "" ?>> Parque infantil<br>
-            <input type="checkbox" name="serv[]" value="Transporte público"<?= in_array("Transporte público",$serv) ? "checked" : "" ?>> Transporte público<br><br>
+            <input type="checkbox" name="serv[]" value="Transporte público"<?= in_array("Transporte público",$serv) ? "checked" : "" ?>> Transporte público<br>
             <input type="checkbox" name="serv[]" value="Amueblado"<?= in_array("Amueblado",$serv) ? "checked" : "" ?>> Amueblado<br><br>
 
             <label>Alquiler</label><br>
