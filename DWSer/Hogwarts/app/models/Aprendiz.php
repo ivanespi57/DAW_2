@@ -17,12 +17,12 @@ class Aprendiz {
         $nivel = null,
         $imagen = null
     ) {
-        $this->nombre       = $nombre;
-        $this->casa         = $casa;
-        $this->varita       = $varita;
-        $this->asignaturas  = $asignaturas;
-        $this->nivel        = $nivel;
-        $this->imagen       = $imagen;
+        $this->nombre = $nombre;
+        $this->casa  = $casa;
+        $this->varita = $varita;
+        $this->asignaturas = $asignaturas;
+        $this->nivel = $nivel;
+        $this->imagen = $imagen;
     }
 
     public function getNombre() {

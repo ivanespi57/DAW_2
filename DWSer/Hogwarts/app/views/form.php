@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php if (!empty($errores)): ?>
     <ul style="color:red;">
         <?php foreach($errores as $error): ?>
-            <li><?= htmlspecialchars($error) ?></li>
+            <li><?= $error ?></li>
         <?php endforeach; ?>
     </ul>
 <?php endif; ?>
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <p>
         <label>Nombre del aprendiz:</label>
-        <input type="text" name="nombre" value="<?= htmlspecialchars($datos['nombre'] ?? '') ?>">
+        <input type="text" name="nombre" value="<?= $datos['nombre'] ?? '' ?>">
     </p>
 
     <p>
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <p>
         <label>Nivel mágico (1-100):</label>
-        <input type="text" name="nivel" value="<?= htmlspecialchars($datos['nivel'] ?? '') ?>">
+        <input type="text" name="nivel" value="<?= $datos['nivel'] ?? ''?>">
     </p>
 
     <p>
