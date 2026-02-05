@@ -1,0 +1,617 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>_UD 12.html</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="ud-11">UD 11</h1>
+<h2 id="alineando-elementos-con-flexbox">ALINEANDO ELEMENTOS CON FLEXBOX</h2>
+<p>Hasta ahora hemos visto cómo mover elementos usando alineación de texto, flotantes y posicionamiento. Durante décadas estas fueron nuestras únicas opciones, y aunque funcionaban, los diseñadores web estábamos listos para una mejor solución. Aquí entra el Módulo de Diseño de Caja Flexible de CSS, o Flexbox para abreviar.</p>
+<p>En pocas palabras, Flexbox se usa para organizar elementos en una fila o columna, pero también nos da un control más preciso sobre la alineación y resuelve algunas de las limitaciones frustrantes de nuestras herramientas de diseño anteriores. Una de las grandes maravillas del modelo Flexbox es que los elementos se redimensionan, o <strong>flex</strong> usando el término formal, para ajustarse al espacio disponible. Esto significa que permite a los elementos estirarse o encogerse dentro de sus contenedores, evitando el espacio desperdiciado y el desbordamiento—una ventaja real para hacer diseños que se adapten a una variedad de tamaños de ventana. Otras ventajas incluyen:</p>
+<p>• La capacidad de hacer que todos los elementos vecinos tengan la misma altura</p>
+<p>• Centrado horizontal y vertical fácil (curiosamente esquivo con los métodos CSS antiguos)</p>
+<p>• La capacidad de cambiar el orden en que se muestran los elementos, independientemente de su orden en el código fuente</p>
+<p>Flexbox es ideal para elementos de página que necesitan alinearse de alguna manera. Las aplicaciones prácticas incluyen barras de navegación, galerías, listados de productos y elementos de formulario-</p>
+<p>El modelo de diseño Flexbox es increíblemente robusto, pero como fue diseñado para máxima flexibilidad, puede tomar un poco de tiempo acostumbrarse. Aquí tienes una forma útil de pensar en él mientras nos adentramos en este capítulo: cuando le dices a un elemento que se convierta en un flexbox, todos sus elementos hijos se alinean en un eje, como cuentas en un hilo. El hilo puede ser horizontal, puede colgar</p>
+<h1 id="configurando-un-contenedor-flex">Configurando un Contenedor Flex</h1>
+<p>CSS Flexbox es una buena opción para alinear barras de navegación, formularios, listados de productos, galerías de imágenes y mucho más.</p>
+<p>verticalmente, o incluso puede envolver múltiples líneas, pero las cuentas siempre están en un hilo (o para usar el término apropiado, un <strong>eje</strong>).</p>
+<p>En este capítulo aprenderás cómo:</p>
+<p>• Configurar un contenedor flex.</p>
+<p>• Controlar la dirección en que fluyen los elementos flex y si pueden envolver a nuevas líneas.</p>
+<p>• Establecer la alineación de elementos en el flexbox.</p>
+<p>• Controlar si y cómo los elementos se encogen o expanden para llenar el espacio disponible.</p>
+<p>• Cambiar el orden en que aparecen los elementos en la alineación.</p>
+<p>Vamos a empezar mirando las propiedades relacionadas con el contenedor flex (dirección, envolvimiento y alineación), luego pasaremos a las propiedades para los elementos flex hijos, incluyendo cómo los elementos pueden encogerse o crecer y en qué orden aparecen.</p>
+<h2 id="configurando-un-contenedor-flex-1">CONFIGURANDO UN CONTENEDOR FLEX</h2>
+<p>Ya has aprendido sobre el modo de visualización en bloque para apilar elementos en el flujo normal y el modo en línea para mostrar contenido horizontalmente. Flexbox es otro modo de visualización con sus propios comportamientos.</p>
+<p>Para activar el modo Flexbox para un elemento, establece su propiedad <strong>display</strong> a <strong>flex</strong> o <strong>inline-flex</strong> (ver <strong>Nota</strong>). Ahora es un <strong>contenedor flex</strong>, y todos sus elementos hijos directos (ya sean divs, elementos de lista, párrafos, etc.) <strong>automáticamente</strong> se comportan como <strong>elementos flex</strong> en ese contenedor. Los elementos flex se disponen y alinean a lo largo del eje, que puede aparecer en una línea o envolver a múltiples líneas.</p>
+<p>El <strong>ejemplo 11.1</strong> muestra el efecto de simplemente agregar <strong>display: flex</strong> a un <strong>div</strong>, activando así el interruptor Flexbox.</p>
+<h3 id="el-html">EL HTML</h3>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box1<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box2<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box3<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box4<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box5<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre>
+<h3 id="los-estilos">LOS ESTILOS</h3>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token id">#container</span> </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<p>Por defecto, los <strong>divs</strong> se muestran como elementos de bloque, apilándose verticalmente. Activar el modo Flexbox los hace alinearse en una fila.<br>
+Al aplicar el modo de visualización <strong>flex</strong> al contenedor convierte sus elementos hijos en elementos flex que se alinean a lo largo de un eje. No necesitas hacer nada a los elementos hijos en sí mismos.</p>
+<h2 id="controlando-el-“flujo”-dentro-del-contenedor">Controlando el “Flujo” Dentro del Contenedor</h2>
+<p>Puedes ver que los elementos se han alineado en una fila de izquierda a derecha, que es el comportamiento predeterminado de Flexbox si tu página está en inglés u otro idioma escrito en filas de izquierda a derecha. Esto es porque la dirección predeterminada de Flexbox coincide con la dirección del idioma en que está escrita la página. Iría de derecha a izquierda por defecto en hebreo o árabe, o en columnas si la página está escrita en un sistema de escritura vertical.</p>
+<p>Vale la pena señalar que puedes convertir cualquier elemento flex en un contenedor flex estableciendo su propiedad <strong>display</strong> a <strong>flex</strong>, resultando en un <strong>flexbox anidado</strong>.</p>
+<hr>
+<blockquote>
+<h3 id="datos-curiosos-de-flexbox">DATOS CURIOSOS DE FLEXBOX</h3>
+<p>Aquí tienes algunas cosas que debes saber sobre el comportamiento de Flexbox y los elementos flex:</p>
+<p>• <strong>float</strong>, <strong>clear</strong>, diseño multicolumna, y <strong>vertical-align</strong> no<br>
+funcionan con elementos en modo Flexbox.</p>
+<p>• Los márgenes no colapsan en modo Flexbox. Los bordes de margen de los elementos se colocan al inicio o final de la línea flex y no se superponen con el padding del contenedor. Los márgenes en elementos vecinos se suman.</p>
+<p>• La especificación recomienda evitar valores de porcentaje para<br>
+márgenes y padding en elementos flex debido a resultados &gt; impredecibles.</p>
+</blockquote>
+<hr>
+<p>Una vez que conviertes un elemento en un contenedor flex, hay algunas propiedades que puedes establecer en ese contenedor para controlar cómo fluyen los elementos dentro de él. El <strong>flujo</strong> se refiere a la dirección en que se disponen los elementos flex así como si se les permite envolver a líneas adicionales.</p>
+<h3 id="especificando-la-dirección-del-flujo">Especificando la Dirección del Flujo</h3>
+<p>Puede que estés contento con que los elementos se alineen en una fila por defecto, pero hay algunas otras opciones que se controlan con la propiedad <strong>flex-direction</strong>.</p>
+<blockquote>
+<p><strong>flex-direction</strong></p>
+<p><strong>Valores:</strong> row | column | row-reverse | column-reverse</p>
+<p><strong>Predeterminado:</strong> row</p>
+<p><strong>Se aplica a:</strong> Contenedores flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>El valor predeterminado es <strong>row</strong>, como vimos en el ejemplo anterior (ver la barra lateral “<strong>Dirección de Fila y Columna</strong>” para una aclaración importante). También puedes especificar que los elementos se alineen verticalmente en una <strong>column</strong>. Las otras opciones, <strong>row-reverse</strong> y <strong>column-reverse</strong>, también organizan elementos horizontal y verticalmente, como esperarías, pero empiezan llenando desde el extremo opuesto. El <strong>Ejemplo 11.2</strong> muestra los efectos de cada palabra clave aplicada a nuestro ejemplo simple.</p>
+<hr>
+<h3 id="dirección-de-fila-y-columna">Dirección de Fila y Columna</h3>
+<p>En sistemas de escritura con líneas horizontales de texto, la palabra clave <strong>row</strong> dispone elementos horizontalmente, que es como los occidentales típicamente pensamos en una “fila” orientada. Ten en cuenta que en idiomas orientados verticalmente, <strong>row</strong> alinea elementos verticalmente, manteniéndose con la dirección predeterminada del sistema de escritura. De manera similar, <strong>column</strong> resulta en elementos alineados horizontalmente en idiomas verticales.</p>
+<p>Este es un comportamiento que vale la pena conocer; sin embargo, como estamos creando sitios en inglés en este libro, seguiré la suposición de que row = horizontal y column = vertical a lo largo de este capítulo por simplicidad.</p>
+<hr>
+<p><strong>flex-direction: row;</strong> (predeterminado)</p>
+<p><strong>flex-direction: row-reverse;</strong></p>
+<p><strong>flex-direction: column;</strong></p>
+<p><strong>flex-direction: column-reverse;</strong></p>
+<p>Ahora que has visto Flexbox en acción, es buen momento para familiarizarte con la terminología formal de Flexbox. Como el sistema es agnóstico de dirección, no hay referencias a ubicaciones físicas como “izquierda”, “derecha”, “arriba” o “abajo” en los valores de propiedad. En su lugar, hablamos del <strong>eje principal</strong> y el <strong>eje cruzado</strong>.</p>
+<p>El eje principal es la dirección de flujo que has especificado para el contenedor flex. Para idiomas principalmente horizontales, cuando <strong>flex-direction</strong> se establece a <strong>row</strong>, el eje principal es horizontal; para <strong>column</strong>, el eje principal es vertical (otra vez, las filas y columnas dependen del idioma). El eje cruzado es la dirección que sea perpendicular al eje principal.</p>
+<p>Además de los ejes, entender las otras partes del sistema Flexbox hace que las propiedades sean más fáciles de aprender. Tanto el eje principal como el cruzado tienen un inicio y un final, basados en la dirección en que fluyen los elementos. Ten en cuenta que la especificación Flexbox usa los términos lógicos “start” y “end” para que funcione con todas las direcciones de escritura.</p>
+<p>El <strong>tamaño principal</strong> es el ancho (o altura si es una columna) del contenedor a lo largo del eje principal, y el <strong>tamaño cruzado</strong> es la altura (o ancho si es una columna) a lo largo del eje cruzado.</p>
+<p>ejemplo 11.3</p>
+<blockquote>
+<p><strong>PARA IDIOMAS QUE SE LEEN HORIZONTALMENTE DE IZQUIERDA A DERECHA:</strong></p>
+<p>Cuando <strong>flex-direction</strong> se establece a <strong>row</strong>, el eje principal es<br>
+horizontal y el eje cruzado es vertical.</p>
+<p>[Diagrama mostrando contenedor flex con eje principal horizontal y eje<br>
+cruzado vertical, incluyendo elementos flex y etiquetas de tamaños]</p>
+<p>Cuando <strong>flex-direction</strong> se establece a <strong>column</strong>, el eje principal<br>
+es vertical y el eje cruzado es horizontal.</p>
+</blockquote>
+<h3 id="envolvimiento-a-múltiples-líneas">Envolvimiento a Múltiples Líneas</h3>
+<p>Si tienes un número grande o desconocido de elementos flex en un contenedor y no quieres que todos se compriman en el espacio disponible, puedes permitir que se dividan en líneas adicionales con la propiedad <strong>flex-wrap</strong>.</p>
+<blockquote>
+<p><strong>flex-wrap</strong></p>
+<p><strong>Valores:</strong> nowrap | wrap | wrap-reverse</p>
+<p><strong>Predeterminado:</strong> nowrap</p>
+<p><strong>Se aplica a:</strong> Contenedores flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>Por defecto, los elementos hacen lo que se comprime y no se envuelven a líneas adicionales (<strong>nowrap</strong>). La palabra clave <strong>wrap</strong> activa la capacidad de envolver a múltiples líneas. Las nuevas líneas se agregan en la dirección desde <strong>cross start</strong> hasta <strong>cross end</strong>. Por ejemplo, con el <strong>flex-direction</strong> predeterminado de <strong>row</strong>, las nuevas líneas se posicionan desde arriba hacia abajo, que es lo que</p>
+<p><strong>wrap-reverse</strong> divide los elementos en múltiples líneas pero los fluye en la dirección opuesta, desde cross end hasta cross start (desde abajo hacia arriba, en este caso). Se siente un poco esotérico, pero nunca sabes cuándo podría surgir una ocasión para usarlo.</p>
+<p>He agregado más <strong>divs</strong> a nuestro ejemplo de flexbox numerado y he dado a los elementos flex un ancho del 25% para que solo cuatro quepan a lo ancho del contenedor.</p>
+<h3 id="el-html-1">EL HTML</h3>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box1<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- 8 more boxes here --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box10<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>10<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre>
+<h3 id="los-estilos-1">LOS ESTILOS</h3>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token id">#container</span> </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">flex-direction</span><span class="token punctuation">:</span> row<span class="token punctuation">;</span>
+    <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token class">.box</span> </span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">25%</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<blockquote>
+<p><strong>flex-wrap: wrap;</strong></p>
+<p><strong>flex-wrap: wrap-reverse;</strong></p>
+<p><strong>flex-wrap: nowrap;</strong> (predeterminado)</p>
+</blockquote>
+<p>Cuando el envolvimiento está deshabilitado, los elementos flex se comprimen para ajustarse a la ventana. Si no hay suficiente espacio, los elementos pueden cortarse.</p>
+<p>Por defecto, cuando <strong>flex-direction</strong> se establece a <strong>column</strong>, el contenedor se expande para contener la altura de los elementos. Para ver el envolvimiento en acción, necesitas establecer una altura en el contenedor, como he hecho en el siguiente ejemplo. El <strong>ejemplo 11-4b</strong> muestra cómo funciona el envolvimiento para cada una de las palabras clave <strong>flex-wrap</strong> cuando <strong>flex-direction</strong> se establece a <strong>column</strong>.</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token id">#container</span> </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">350</span>px<span class="token punctuation">;</span>
+    <span class="token property">flex-direction</span><span class="token punctuation">:</span> column<span class="token punctuation">;</span>
+    <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token class">.box</span> </span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">25%</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<h3 id="juntándolo-con-flex-flow">Juntándolo con flex-flow</h3>
+<p>La propiedad abreviada <strong>flex-flow</strong> hace que especificar <strong>flex-direction</strong> y <strong>flex-wrap</strong> sea corto y dulce. Omitir un valor resulta en el valor predeterminado para su respectiva propiedad, lo que significa que puedes usar <strong>flex-flow</strong> para cualquiera o ambas direcciones y envolvimiento.</p>
+<blockquote>
+<p><strong>flex-flow</strong></p>
+<p><strong>Valores:</strong> flex-direction flex-wrap</p>
+<p><strong>Predeterminado:</strong> row nowrap</p>
+<p><strong>Se aplica a:</strong> Contenedores flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>Usando <strong>flex-flow</strong>, podría acortar el ejemplo anterior así:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token id">#container</span> </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">350</span>px<span class="token punctuation">;</span>
+    <span class="token property">flex-flow</span><span class="token punctuation">:</span> column wrap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<h2 id="controlando-la-alineación-de-elementos-flex">CONTROLANDO LA ALINEACIÓN DE ELEMENTOS FLEX</h2>
+<p>Hasta ahora, has visto cómo activar el modo Flexbox, convirtiendo un elemento en un contenedor flex y sus hijos en elementos flex. También has aprendido cómo cambiar la dirección en que fluyen los elementos y permitir que se envuelvan a múltiples líneas. Las propiedades restantes del contenedor afectan la alineación de elementos a lo largo del eje principal (<strong>justify-content</strong>) y el eje cruzado (<strong>align-items</strong> y <strong>align-content</strong>). Ver la barra lateral “<strong>El Módulo de Alineación de Cajas</strong>” para un poco de información de fondo sobre cómo el W3C está pensando en estas propiedades de alineación.</p>
+<h2 id="alineación-en-el-eje-principal">Alineación en el Eje Principal</h2>
+<p>Por defecto, los elementos flex son solo tan anchos como necesitan ser para contener el contenido de los elementos, lo que significa que el contenedor puede tener espacio de sobra en la línea flex. También por defecto, los elementos fluyen uno junto al otro desde el “main start” (basado en la dirección del idioma y la dirección de la línea flex).</p>
+<p>La propiedad <strong>justify-content</strong> define cómo se debe distribuir el espacio extra alrededor o entre elementos que son inflexibles o han alcanzado su tamaño máximo (ver <strong>Nota</strong>). La configuración se aplica <em>después</em> de que se han calculado los márgenes en los elementos y después de que se han contabilizado los valores “flex”. Si los elementos están especificados para crecer y llenar el ancho del contenedor, entonces <strong>justify-content</strong> no es aplicable.</p>
+<blockquote>
+<p><strong>justify-content</strong></p>
+<p><strong>Valores:</strong> flex-start | flex-end | center | space-between | space-around</p>
+<p><strong>Predeterminado:</strong> flex-start</p>
+<p><strong>Se aplica a:</strong> Contenedores flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>Aplicas <strong>justify-content</strong> al elemento contenedor flex porque controla el espaciado dentro del contenedor mismo:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token id">#container</span> </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Como esperarías, <strong>flex-start</strong> y <strong>flex-end</strong> posicionan la línea de elementos hacia el inicio y final del eje principal, respectivamente, y <strong>center</strong> los centra.</p>
+<p><strong>space-between</strong> y <strong>space-around</strong> requieren un poco más de explicación. Cuando <strong>justify-content</strong> se establece a <strong>space-between</strong>, el primer elemento se posiciona en el punto de inicio, el último elemento va al punto final, y el espacio restante se distribuye uniformemente entre los elementos restantes. La propiedad <strong>space-around</strong> agrega una cantidad igual de espacio en el lado izquierdo y derecho de cada elemento, resultando en una duplicación del espacio entre elementos vecinos. La <strong>FIGURA 12-8</strong> muestra cómo se alinean los elementos usando cada uno de los valores de palabra clave para <strong>justify-content</strong>.</p>
+<p>Cuando la dirección del contenedor flex se establece a <strong>column</strong> con un eje principal vertical, las palabras clave funcionan de la misma manera; sin embargo, necesita haber una altura explícita del contenedor con espacio sobrante para que veas el efecto. He cambiado el tamaño del texto y establecido una altura en el elemento contenedor en la <strong>FIGURA 12-9</strong> para demostrar las mismas palabras clave aplicadas a un eje principal vertical cuando <strong>flex-direction</strong> se establece a <strong>column</strong>.</p>
+<hr>
+<blockquote>
+<h3 id="el-módulo-de-alineación-de-cajas">El Módulo de Alineación de Cajas</h3>
+<p>El W3C ha creado un módulo separado documentando todas las<br>
+características relacionadas con la alineación de cajas dentro de sus<br>
+contenedores. El Módulo de Alineación de Cajas CSS Nivel 3 define los<br>
+conceptos de ejes principal y cruzado y especifica seis propiedades de<br>
+alineación de cajas que se aplican a Flexbox así como a los modelos de<br>
+diseño de bloque, cuadrícula y tabla. Además, introduce propiedades de<br>
+espaciado que controlan la cantidad de espacio entre filas y columnas<br>
+que pueden aplicarse a diseños flex, cuadrícula y multicolumna.<br>
+Cubriré el concepto de “gap” con más detalle mas adelante.</p>
+<p>Por ahora, las propiedades de alineación también están incluidas en el<br>
+módulo Flexbox, pero el plan a largo plazo es usar el Módulo de<br>
+Alineación de Cajas como la referencia definitiva. Una vez que esté<br>
+completo, será supersedido por las propiedades específicas de Flexbox.<br>
+Si te gustaría obtener información sobre la estrategia más amplia para<br>
+alinear elementos dentro de sus contenedores, echa un vistazo a la<br>
+especificación en <a href="http://w3.org/TR/css-align-3/">w3.org/TR/css-align-3/</a>.</p>
+<h3 id="nota">NOTA</h3>
+<p><em>También puedes distribuir espacio extra a lo largo del eje principal haciendo que los elementos flex crezcan más anchos para llenar el<br>
+espacio disponible. Ese es el trabajo de las propiedades <strong>flex</strong>, que<br>
+veremos en un momento.</em></p>
+</blockquote>
+<h2 id="alineación-en-el-eje-cruzado">Alineación en el Eje Cruzado</h2>
+<p>Eso se encarga de organizar las cosas en el eje principal, pero también puedes querer jugar con la alineación en el eje cruzado (arriba y abajo cuando la dirección es <strong>row</strong>, izquierda y derecha si la dirección es <strong>column</strong>). La alineación y estiramiento del eje cruzado son trabajo de la propiedad <strong>align-items</strong>.</p>
+<blockquote>
+<p><strong>align-items</strong></p>
+<p><strong>Valores:</strong> flex-start | flex-end | center | baseline | stretch</p>
+<p><strong>Predeterminado:</strong> stretch</p>
+<p><strong>Se aplica a:</strong> Contenedores flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>He demostrado los varios valores de palabra clave para <strong>align-items</strong> como se aplican a filas en la <strong>FIGURA 12-10</strong>. Para ver el efecto, debes especificar una altura para el contenedor; de lo contrario, se expande lo justo para contener el contenido sin espacio extra que sobrar. He dado al contenedor una altura fija aquí para mostrar cómo se posicionan los elementos en el eje cruzado (es decir, verticalmente en relación al contenedor) con los diferentes valores.</p>
+<p>Como <strong>justify-content</strong>, la propiedad <strong>align-items</strong> se aplica al contenedor flex (eso puede ser un poco confuso porque “items” está en el nombre):</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token id">#container</span> </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">flex-direction</span><span class="token punctuation">:</span> row<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+    <span class="token property">align-items</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Los valores <strong>flex-start</strong>, <strong>flex-end</strong>, y <strong>center</strong> deberían ser familiares, solo que esta vez se refieren al inicio, final y centro del eje cruzado. El valor <strong>baseline</strong> alinea las líneas base de las primeras líneas de texto, independientemente de su tamaño. Puede ser una buena opción para alinear elementos con diferentes tamaños de texto, como títulos y párrafos a través de múltiples elementos. Finalmente, <strong>stretch</strong>, que es el predeterminado, hace que los elementos se estiren hasta que llenen el eje cruzado (es decir, la altura del contenedor).</p>
+<p>Cuando la dirección del contenedor flex se establece a <strong>column</strong>, <strong>align-items</strong> alinea elementos horizontalmente en el contenedor. Mira las <strong>FIGURAS 12-3</strong> y <strong>12-9</strong>, y verás que cuando establecí los elementos en una columna y no proporcioné ninguna información de alineación, cada elemento se estiró al ancho completo del eje cruzado, porque <strong>stretch</strong> es el valor predeterminado.</p>
+<p>Si te gustaría que uno o más elementos específicos anulen la configuración del eje cruzado, usa la propiedad <strong>align-self</strong> en los elementos individuales. Esta es la primera propiedad que hemos visto que se aplica a un <em>elemento</em>, no al contenedor. <strong>align-self</strong> usa los mismos valores que <strong>align-items</strong>; simplemente funciona en un elemento a la vez.</p>
+<blockquote>
+<p><strong>align-self</strong></p>
+<p><strong>Valores:</strong> flex-start | flex-end | center | baseline | stretch</p>
+<p><strong>Predeterminado:</strong> stretch</p>
+<p><strong>Se aplica a:</strong> Elementos flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>En el siguiente código y <strong>FIGURA 12-11</strong>, la cuarta caja está configurada para alinearse al final del eje cruzado, mientras que las otras tienen el comportamiento de estiramiento predeterminado:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box4</span> </span><span class="token punctuation">{</span>
+    <span class="token property">align-self</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>FIGURA 12-11.</strong> Usa <strong>align-self</strong> para hacer que un elemento anule la alineación del eje cruzado de su contenedor.</p>
+<h2 id="alineando-múltiples-líneas">Alineando Múltiples Líneas</h2>
+<p>La opción final de alineación, <strong>align-content</strong>, afecta cómo se distribuyen múltiples líneas flex a través del eje cruzado. Esta propiedad se aplica solo cuando <strong>flex-wrap</strong> se establece a <strong>wrap</strong> o <strong>wrap-reverse</strong> y hay múltiples líneas para alinear. Si los elementos están en una sola línea, no hace nada.</p>
+<br>
+<blockquote>
+<p><strong>align-content</strong></p>
+<p><strong>Valores:</strong> flex-start | flex-end | center | space-around | space-between | stretch</p>
+<p><strong>Predeterminado:</strong> stretch</p>
+<p><strong>Se aplica a:</strong> Contenedores flex multilínea</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<br>
+<blockquote>
+<p><strong>align-content se aplica solo cuando hay múltiples líneas flex envueltas.</strong><br>
+<br></p>
+</blockquote>
+<p>Todos los valores que ves en la lista de propiedades deberían parecer familiares, y funcionan de la manera que esperarías. Esta vez, sin embargo, se aplican a cómo se distribuye el espacio extra alrededor de múltiples líneas en el eje cruzado, como se muestra en la <strong>FIGURA 12-12</strong>.</p>
+<p>Nuevamente, la propiedad <strong>align-content</strong> se aplica al elemento contenedor flex. Se requiere una altura para el contenedor también, porque sin ella el contenedor sería justo lo suficientemente alto para acomodar el contenido y no habría espacio sobrante. Para las opciones de alineación mostradas en la <strong>FIGURA 12-12</strong>, le di al contenedor una altura de 350px y permití que las líneas se envolvieran:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token id">#container</span> </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">flex-direction</span><span class="token punctuation">:</span> row<span class="token punctuation">;</span>
+    <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">350</span>px<span class="token punctuation">;</span>
+    <span class="token property">align-content</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token class">.box</span> </span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">25%</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="técnicas-de-alineación-flexbox">TÉCNICAS DE ALINEACIÓN FLEXBOX</h2>
+<p>Solo hemos cubierto las propiedades del contenedor flex, y resulta que ya tienes suficiente conocimiento de Flexbox para abordar dos métodos populares para usar Flexbox en alineación. En la primera técnica, aplicamos un margen a un elemento flex para separarlo de los otros elementos en el eje. La segunda técnica usa Flexbox para centrar perfectamente un elemento dentro de su elemento contenedor.</p>
+<h2 id="alineando-elementos-con-márgenes">Alineando Elementos con Márgenes</h2>
+<p>Las barras de menú son ubicuas en la web, y es común que un elemento en la barra, como un logo o un campo de búsqueda, se separe visualmente de los otros. Puedes usar un margen para poner el espacio extra del contenedor en un lado específico o lados de un elemento flex, separando así ese elemento. Esto debería quedar más claro con un ejemplo.</p>
+<p>El menú en la <strong>FIGURA 12-13</strong> tiene un logo y cuatro opciones de menú. Me gustaría que el logo permanezca en la esquina izquierda pero que las opciones aparezcan a la derecha, independientemente del ancho de la ventana.</p>
+<h3 id="el-html-2">EL HTML</h3>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>logo<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>logo.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>LoGoCo<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>About<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>Blog<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>Shop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>Contact<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<h3 id="los-estilos-2">LOS ESTILOS</h3>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector">ul </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#00af8f</span><span class="token punctuation">;</span>
+    <span class="token property">list-style</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span> <span class="token comment">/* removes bullets */</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">.5</span>em<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">li </span><span class="token punctuation">{</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">0</span> <span class="token number">1</span>em<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">li<span class="token class">.logo</span> </span><span class="token punctuation">{</span>
+    <span class="token property">margin-right</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Usando un margen para ajustar el espacio alrededor de elementos flex. En este ejemplo, el margen derecho del elemento logo empuja los elementos restantes hacia la derecha.</p>
+<h1 id="técnicas-de-alineación-flexbox-1">Técnicas de Alineación Flexbox</h1>
+<p>He convertido la lista no ordenada (<strong>ul</strong>) en un contenedor flex, por lo que sus elementos de lista (<strong>li</strong>) ahora son elementos flex. Por defecto, los elementos se mantendrían juntos al inicio del eje principal (a la izquierda) con el espacio extra a la derecha. Establecer el margen derecho del elemento logo a <strong>auto</strong> mueve el espacio extra a la derecha del logo, empujando los elementos restantes hasta el final (el “main end”).</p>
+<p>Esta técnica se aplica a varios escenarios. Si quieres que solo el último elemento aparezca a la derecha, establece su margen izquierdo a <strong>auto</strong>. ¿Quieres espacio igual alrededor del elemento central en una lista? Establece tanto sus márgenes izquierdo como derecho a <strong>auto</strong>. ¿Quieres empujar un botón al fondo de una columna? Establece el margen superior del último elemento a <strong>auto</strong>. El espacio extra en el contenedor va al margen y empuja los elementos vecinos. Nota, sin embargo, que cuando aplicas <strong>margin: auto</strong> a un elemento flex, la propiedad <strong>justify-content</strong> (si hay una) ya no tiene un efecto visual, porque has asignado manualmente una ubicación para el espacio extra en el eje principal.</p>
+<h2 id="centrando-elementos-con-flexbox">Centrando Elementos con Flexbox</h2>
+<p>Puede que te sorprenda saber que CSS realmente no tenía una forma explícita de centrar elementos verticalmente hasta que llegó Flexbox. Claro, se nos ocurrieron soluciones alternativas, pero fue un alivio para nosotros los veteranos tener una solución simple y correcta.</p>
+<p>En el siguiente ejemplo, he centrado un <strong>div</strong> que contiene una sola imagen en un <strong>div</strong> contenedor más grande usando propiedades de alineación Flexbox con el valor de palabra clave <strong>center</strong> . ¡Realmente no podría ser más simple, y sin embargo esperamos años y años para esto!</p>
+<h3 id="el-html-3">EL HTML</h3>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>flower.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>photo of a yellowflower<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<h3 id="los-estilos-3">LOS ESTILOS</h3>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.container</span> </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">400</span>px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">400</span>px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> blanchedalmond<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token class">.item</span> </span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">100</span>px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">100</span>px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="determinando-cómo-los-elementos-flex-en-el-contenedor">DETERMINANDO CÓMO LOS ELEMENTOS “FLEX” EN EL CONTENEDOR</h2>
+<p>Por fin, hemos llegado a la propiedad importante que le da su nombre a Flexbox. Como se mencionó al principio del capítulo, la característica principal del modelo Flexbox es que los elementos pueden <strong>flex</strong> (redimensionarse) para llenar el espacio disponible en el contenedor. En esta sección, conocerás las propiedades flex.</p>
+<p>Anteriormente, aprendiste sobre la propiedad <strong>justify-content</strong>, que distribuye espacio extra en el contenedor entre y alrededor de elementos a lo largo del eje principal. El concepto de flex se refiere a cómo se distribuye el espacio <em>dentro</em> de los elementos mismos, haciéndolos crecer o encogerse según sea necesario para ajustarse al espacio disponible.</p>
+<p>Flex se controla con la propiedad <strong>flex</strong>, que especifica cuánto puede crecer y encogerse un elemento, e identifica su tamaño inicial. La historia completa es que <strong>flex</strong> es una propiedad abreviada para <strong>flex-grow</strong>, <strong>flex-shrink</strong>, y <strong>flex-basis</strong>, pero la especificación recomienda encarecidamente que los autores usen la abreviada <strong>flex</strong> en lugar de propiedades individuales para evitar valores predeterminados conflictivos y para asegurar que los autores consideren los tres aspectos de <strong>flex</strong> para cada instancia.</p>
+<blockquote>
+<p><strong>flex</strong></p>
+<p><strong>Valores:</strong> none | flex-grow flex-shrink flex-basis</p>
+<p><strong>Predeterminado:</strong> 0 1 auto</p>
+<p><strong>Se aplica a:</strong> Elementos flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>El valor para la propiedad <strong>flex</strong> son típicamente valores para las tres propiedades flex, listados en este orden:</p>
+<p><strong>flex: flex-grow flex-shrink flex-basis;</strong></p>
+<p>Para las propiedades <strong>flex-grow</strong> y <strong>flex-shrink</strong>, los valores 1 y 0 funcionan como interruptores de encendido/apagado, donde 1 “activa” el comportamiento, permitiendo que un elemento crezca o se encoja, y 0 lo previene. La propiedad <strong>flex-basis</strong> establece las dimensiones iniciales, ya sea a un tamaño específico o a un tamaño basado en el contenido.</p>
+<p>Para mostrarte cómo funciona esto, aquí hay un ejemplo rápido en el que un elemento de lista comienza con 200 píxeles de ancho (su <strong>flex-basis</strong>), se le permite expandirse para llenar espacio extra (<strong>flex-grow</strong> establecido a 1), pero no se le permite encogerse (<strong>flex-shrink</strong> establecido a 0) más estrecho que los 200 píxeles originales:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector">li </span><span class="token punctuation">{</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">200</span>px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Eso debería darte la idea general. En esta sección, echaremos un vistazo mucho más cercano al crecimiento, encogimiento y tamaño base, en ese orden. Las propiedades flex, aunque fáciles de usar, son un poco tediosas de explicar, así que respira profundo mientras nos adentramos en los detalles.</p>
+<p>Primero, es importante señalar que <strong>flex</strong> y sus propiedades componentes se aplican a elementos <em>flex</em>, no al contenedor. Mantener el control de qué propiedades van en el contenedor y cuáles van en los elementos es uno de los trucos de usar Flexbox. Ver la barra lateral “<strong>Propiedades Flex</strong>” para una lista práctica de cómo se dividen las propiedades.</p>
+<h2 id="expandiendo-elementos-flex-grow">Expandiendo Elementos (flex-grow)</h2>
+<p>El primer valor en la propiedad <strong>flex</strong> especifica si (y en qué proporción) un elemento puede estirarse más grande—en otras palabras, su valor <strong>flex-grow</strong> (ver <strong>Nota</strong>). Por defecto se establece a 0, lo que significa que un elemento no tiene permitido crecer más ancho que el tamaño de su contenido o su ancho especificado.</p>
+<blockquote>
+<p><strong>flex-grow</strong></p>
+<p><strong>Valores:</strong> number</p>
+<p><strong>Predeterminado:</strong> 0</p>
+<p><strong>Se aplica a:</strong> Elementos flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>Si estableces el valor <strong>flex-grow</strong> para todos los elementos en un contenedor a 1, el navegador toma cualquier espacio extra que esté disponible a lo largo del eje principal y lo aplica igualmente a cada elemento, permitiendo que todos se estiren la misma cantidad.</p>
+<p>Tomemos el ejemplo de caja simple de antes en el capítulo y veamos cómo se comporta con varias configuraciones flex aplicadas. La <strong>FIGURA 12-19</strong> muestra qué pasa cuando <strong>flex-grow</strong> se establece a 1 para todos los elementos de caja (<strong>flex-shrink</strong> y <strong>flex-basis</strong> se dejan en sus valores predeterminados). Compara esto con el mismo ejemplo con <strong>flex-grow</strong> establecido al predeterminado 0 (este es el mismo comportamiento que observamos en la <strong>FIGURA 12-2</strong>).</p>
+<h3 id="el-html-4">EL HTML</h3>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box1<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box2<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box3<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box4<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>box box5<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<h3 id="los-estilos-4">LOS ESTILOS</h3>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box</span> </span><span class="token punctuation">{</span>
+    <span class="token number">...</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">1</span> auto<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Si asignas un entero <strong>flex-grow</strong> más alto a un elemento, actúa como una proporción que aplica más espacio dentro de ese elemento. Por ejemplo, dar a “box4” el valor <strong>flex-grow: 3</strong> significa que recibe tres veces la cantidad de espacio sobrante que los elementos restantes, establecidos a <strong>flex-grow: 1</strong>. La <strong>FIGURA 12-20</strong> muestra el resultado de esta regla de estilo:</p>
+<hr>
+<h3 id="🔶-de-un-vistazo">🔶 DE UN VISTAZO</h3>
+<p><strong>Propiedades Flex</strong></p>
+<p>Ahora que has sido introducido a todas las propiedades en el Módulo de Diseño de Caja Flexible CSS Nivel 1, podría ser útil ver de un vistazo qué propiedades se aplican a contenedores y cuáles se establecen en elementos flex.</p>
+<p><strong>Propiedades del contenedor</strong><br>
+Aplica estas propiedades al contenedor flex:</p>
+<ul>
+<li>display</li>
+<li>flex-flow
+<ul>
+<li>flex-direction</li>
+<li>flex-wrap</li>
+</ul>
+</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>align-content</li>
+</ul>
+<p><strong>Propiedades de elementos flex</strong><br>
+Aplica estas propiedades a elementos flex:</p>
+<ul>
+<li>align-self</li>
+<li>flex
+<ul>
+<li>flex-grow</li>
+<li>flex-shrink</li>
+<li>flex-basis</li>
+</ul>
+</li>
+<li>order</li>
+</ul>
+<blockquote>
+<h3 id="nota-1">NOTA</h3>
+<p><em>flex-grow es la propiedad individual que especifica cómo puede expandirse un elemento. Se alienta a los autores a usar la propiedad<br>
+abreviada flex en su lugar.</em></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Las propiedades flex se aplican a elementos flex, no al contenedor.</strong></p>
+</blockquote>
+<hr>
+<p><strong>flex: 0 1 auto;</strong> El valor predeterminado de flex-grow de 0 previene la expansión.</p>
+<p><strong>flex: 1 1 auto;</strong> Un valor de flex-grow de 1 permite la expansión.</p>
+<p>Cuando <strong>flex-grow</strong> se establece a 1, el espacio extra en la línea se distribuye en los elementos en porciones iguales, y se expanden para llenar el espacio a la misma velocidad.</p>
+<p><strong>flex: 3 1 auto;</strong></p>
+<p>Asignando un valor <strong>flex-grow</strong> diferente a un elemento individual. Aquí, “box4” fue establecido para expandirse a tres veces la velocidad de los otros elementos.</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box4</span> </span><span class="token punctuation">{</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">3</span> <span class="token number">1</span> auto<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Nota que el elemento resultante no es tres veces más ancho que los otros; simplemente obtuvo tres veces la cantidad de espacio extra agregado a él.</p>
+<p>Si no queda mucho espacio en la línea, hay una posibilidad de que cada porción de espacio pueda ser lo suficientemente pequeña que no sumaría mucha diferencia. Puede que necesites jugar con los valores <strong>flex-grow</strong> y ajustar el ancho del navegador hasta que obtengas el efecto que quieres.</p>
+<p>Ahora que tienes ese concepto claro, el encogimiento debería ser directo, porque se basa en el mismo principio.</p>
+<h2 id="comprimiendo-elementos-flex-shrink">Comprimiendo Elementos (flex-shrink)</h2>
+<p>El segundo valor de la propiedad <strong>flex</strong>, <strong>flex-shrink</strong>, entra en acción cuando el contenedor no es lo suficientemente ancho para contener los elementos, resultando en un déficit de espacio. Esencialmente quita algo de espacio de dentro de los elementos, encogiéndolos para que encajen, según una proporción especificada.</p>
+<blockquote>
+<p><strong>flex-shrink</strong></p>
+<p><strong>Valores:</strong> number</p>
+<p><strong>Predeterminado:</strong> 1</p>
+<p><strong>Se aplica a:</strong> Elementos flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>Por defecto, el valor <strong>flex-shrink</strong> se establece a 1, lo que significa que si no haces nada, los elementos se encogen para ajustarse con el mismo ratio. Cuando <strong>flex-shrink</strong> es 0, los elementos no tienen permitido encogerse, y pueden colgar fuera de su contenedor y extenderse más allá del borde de la ventana. Finalmente, como con <strong>flex-grow</strong>, un entero más alto funciona como una proporción. Un elemento con un <strong>flex-shrink</strong> de 2 se encogerá dos veces más  que si estuviera establecido a 1. Generalmente no necesitarás especificar un valor de proporción de encogimiento; simplemente activar el encogimiento (1) o desactivarlo (0) debería ser suficiente.</p>
+<p>Eventualmente, queremos que nuestros elementos flex dejen de encogerse. Por defecto, esto sucede cuando alcanzan su tamaño mínimo, que se basa en el tamaño más pequeño en que el contenido puede caber (<strong>min-content</strong>). Por ejemplo, el ancho más pequeño posible de un elemento que contiene el texto “The dog jumps” se basa en la palabra “jumps”—ese es el ancho más pequeño en que el contenido puede caber sin tener que dividir palabras en múltiples líneas.</p>
+<p>Puedes ajustar fácilmente el tamaño mínimo usando las propiedades <strong>min-width</strong>/<strong>min-height</strong> para establecer la longitud a 0, 12em, o cualquier otra longitud que parezca útil. Ten cuidado con este efecto cuando elementos profundamente anidados fuercen a un elemento flex a ser más ancho de lo esperado.</p>
+<h2 id="proporcionando-un-tamaño-inicial-flex-basis">Proporcionando un Tamaño Inicial (flex-basis)</h2>
+<p>El tercer valor <strong>flex</strong> define el tamaño inicial del elemento antes de que ocurra cualquier envolvimiento, crecimiento o encogimiento (<strong>flex-basis</strong>). Puede usarse en lugar de la propiedad <strong>width</strong> (o propiedad <strong>height</strong> para columnas) para elementos flex.</p>
+<p>**</p>
+<blockquote>
+<p>flex-basis**</p>
+<p><strong>Valores:</strong> length | percentage | content | auto</p>
+<p><strong>Predeterminado:</strong> auto</p>
+<p><strong>Se aplica a:</strong> Elementos flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>En este ejemplo, el <strong>flex-basis</strong> de las cajas se establece a 100 píxeles  Los elementos tienen permitido encogerse más pequeños para caber en el espacio disponible (<strong>flex-shrink: 1</strong>), pero no tienen permitido crecer más anchos (<strong>flex-grow: 0</strong>) que 100 píxeles, dejando espacio extra en el contenedor:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box</span> </span><span class="token punctuation">{</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">0</span> <span class="token number">1</span> <span class="token number">100</span>px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<blockquote>
+<p><strong>Por defecto, los elementos pueden encogerse cuando el contenedor no es lo suficientemente ancho (flex-shrink: 1).</strong></p>
+</blockquote>
+<p><strong>flex: 0 1 100px;</strong></p>
+<p>Cuando el contenedor es ancho, los elementos no crecerán más anchos que su <strong>flex-basis</strong> de 100 píxeles porque <strong>flex-grow</strong> está establecido a 0.</p>
+<p>Cuando el contenedor es estrecho, los elementos tienen permitido encogerse para ajustarse (<strong>flex-shrink: 1</strong>).</p>
+<p>Usando <strong>flex-basis</strong> para establecer el ancho inicial de los elementos</p>
+<p>Por defecto, <strong>flex-basis</strong> se establece a <strong>auto</strong>, que usa los valores de propiedad <strong>width</strong>/<strong>height</strong> especificados para el tamaño del elemento. Si la propiedad de tamaño principal del elemento (<strong>width</strong> o <strong>height</strong>) no está establecida, o está establecida a <strong>auto</strong> (su predeterminado), <strong>flex-basis</strong> usa el ancho del contenido. También puedes establecer explícitamente <strong>flex-basis</strong> para que sea el ancho del contenido con la palabra clave <strong>content</strong>.</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box</span> </span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">300</span>px<span class="token punctuation">;</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">0</span> auto<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>En este ejemplo, el <strong>flex-basis</strong> para las cajas sería 300 píxeles porque el valor <strong>auto</strong> para <strong>flex-basis</strong> usa el valor establecido por la propiedad <strong>width</strong>. Los elementos tienen permitido crecer más anchos, tomando cualquier espacio extra en el contenedor, pero no tienen permitido encogerse:</p>
+<p>Cuando el navegador se encarga de dimensionar un elemento flex, consulta el valor <strong>flex-basis</strong>, lo compara con el espacio disponible a lo largo del eje, y luego agrega o quita espacio del elemento según sus configuraciones de crecimiento y encogimiento. Es importante notar que si permites que un elemento crezca o se encoja, podría terminar siendo más estrecho o más ancho que la longitud proporcionada por <strong>flex-basis</strong> o <strong>width</strong>.</p>
+<h2 id="valores-abreviados-útiles-de-flex">Valores Abreviados Útiles de flex</h2>
+<p>La ventaja de usar la propiedad <strong>flex</strong> es que hay algunos valores abreviados útiles que cubren escenarios típicos de Flexbox. Algunos de los valores abreviados anulan los predeterminados de las propiedades individuales, pero al final resulta en comportamientos más predecibles. Cuando especifiques <strong>flex</strong> para elementos, ve si una de estas configuraciones fáciles hará el truco:</p>
+<hr>
+<blockquote>
+<p>*<em>Las configuraciones flex anulan los anchos/alturas especificados para elementos flex.</em></p>
+</blockquote>
+<h2 id="cambiando-el-orden-de-elementos-flex">Cambiando el Orden de Elementos Flex</h2>
+<p><strong>flex: initial;</strong><br>
+Esto es lo mismo que el <strong>flex: 0 1 auto</strong> predeterminado. Previene que el elemento flex crezca incluso cuando hay espacio extra, pero le permite encogerse para ajustarse en el contenedor. El tamaño se basa en las propiedades <strong>width</strong>/<strong>height</strong> especificadas, por defecto al tamaño del contenido. Con el valor <strong>initial</strong>, puedes usar <strong>justify-content</strong> para alineación horizontal.</p>
+<p><strong>flex: auto;</strong><br>
+Esto es lo mismo que <strong>flex: 1 1 auto</strong>. Permite que los elementos sean completamente flexibles, creciendo o encogiendo según sea necesario. El tamaño se basa en las propiedades <strong>width</strong>/<strong>height</strong> especificadas.</p>
+<p><strong>flex: none;</strong><br>
+Esto es equivalente a <strong>flex: 0 0 auto</strong>. Crea un elemento flex completamente inflexible, dimensionándolo según los valores de las propiedades <strong>width</strong> y <strong>height</strong>. También puedes usar <strong>justify-content</strong> para alineación cuando <strong>flex</strong> está establecido a <strong>none</strong>.</p>
+<p><strong>flex: integer;</strong><br>
+Esto es lo mismo que <strong>flex: integer 1 0%</strong>. El resultado es un elemento flexible con un <strong>flex-basis</strong> de 0, lo que significa que tiene <strong>flex absoluto</strong> (ver la barra lateral “<strong>Flex Absoluto Versus Relativo</strong>”) y el espacio extra se asigna usando el entero especificado como proporción.</p>
+<h2 id="cambiando-el-orden-de-elementos-flex-1">CAMBIANDO EL ORDEN DE ELEMENTOS FLEX</h2>
+<p>Una característica útil de Flexbox es la capacidad de mostrar elementos en un orden que difiere de su orden en el código fuente (ver la barra lateral “<strong>Cuándo Reordenar (y Cuándo No)</strong>”). Esto significa que puedes cambiar el orden de diseño de elementos usando solo CSS. Esto es poderoso para diseño responsivo, permitiendo que el contenido de más adelante en un documento se mueva hacia arriba en pantallas más pequeñas.</p>
+<p>Para cambiar el orden de elementos, aplica la propiedad <strong>order</strong> a los elementos particulares que deseas mover.</p>
+<blockquote>
+<p><strong>order</strong></p>
+<p><strong>Valores:</strong> integer</p>
+<p><strong>Predeterminado:</strong> 0</p>
+<p><strong>Se aplica a:</strong> Elementos flex e hijos posicionados absolutamente de contenedores flex</p>
+<p><strong>Hereda:</strong> No</p>
+</blockquote>
+<p>El valor de la propiedad <strong>order</strong> es un número positivo o negativo que afecta la colocación del elemento a lo largo de la línea flex. Es similar a la propiedad <strong>z-index</strong> en que el valor numérico específico no importa, solo cómo se relaciona con otros valores.</p>
+<hr>
+<h3 id="cuándo-reordenar-y-cuándo-no">Cuándo Reordenar (y Cuándo No)</h3>
+<p>Ten en cuenta que aunque es conveniente, reordenar solo da un truco visual y debe usarse con discreción. Algunos puntos a recordar:</p>
+<p>• Aunque los elementos se muestren en un orden diferente para navegadores visuales, dispositivos alternativos como lectores de pantalla aún leen el contenido en el orden en que aparece en el código fuente (aunque este comportamiento no es 100% confiable en el mundo real).</p>
+<p>• Reordena el código fuente si hay una razón lógica (más que visual) para el reordenamiento.</p>
+<p>• No uses <strong>order</strong> porque es más conveniente.</p>
+<p>• Usa <strong>order</strong> si el orden lógico y visual están destinados a ser diferentes.<br>
+Con flex absoluto (cuando <strong>flex-basis</strong> se establece a 0), las cajas se dimensionan proporcionalmente según sus proporciones flex.</p>
+<p>Por defecto, todos los elementos tienen un valor <strong>order</strong> de cero (0). Cuando los elementos tienen el mismo valor <strong>order</strong>, se disponen en el orden en que aparecen en el código fuente HTML. Si tienen valores <strong>order</strong> <em>diferentes</em>, se organizan desde el valor <strong>order</strong> más bajo al más alto.</p>
+<p>Volviendo a nuestro ejemplo de caja numerada colorida, aquí le he dado a <strong>box3</strong> un valor <strong>order</strong> de 1. Con un valor <strong>order</strong> más alto, aparece después de todos los elementos establecidos a 0 (el predeterminado).</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box3</span> </span><span class="token punctuation">{</span>
+    <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<blockquote>
+<p><strong>Cuando especifiques flex para elementos, ve si puedes aprovechar uno de los atajos útiles de flex.</strong></p>
+</blockquote>
+<p>Cambiando el orden de elementos con la propiedad <strong>order</strong>. Establecer <strong>box3</strong> a <strong>order: 1</strong> hace que se muestre después del resto.</p>
+<p>Cuando múltiples elementos comparten el mismo valor <strong>order</strong>, ese grupo de elementos que comparten valores (llamado un <strong>grupo ordinal</strong>) se mantienen juntos y se muestran en orden de código fuente. ¿Qué pasa si le damos a <strong>box2</strong> un valor <strong>order</strong> de 1 también? Ahora tanto <strong>box2</strong> como <strong>box3</strong> tienen un valor <strong>order</strong> de 1 (convirtiéndolos en un grupo ordinal), y se muestran en orden de código fuente después de todos los elementos con el valor <strong>order</strong> más bajo de 0</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box2</span>, <span class="token class">.box3</span> </span><span class="token punctuation">{</span>
+    <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Establecer <strong>box2</strong> a <strong>order: 1</strong> también hace que se muestre después de los elementos con el <strong>order</strong> predeterminado de 0, pero antes que <strong>box3</strong>.</p>
+<p>También puedes usar valores negativos para <strong>order</strong>. Para continuar con nuestro ejemplo, aquí le he dado a <strong>box5</strong> un valor <strong>order</strong> de −1. Nota en la <strong>FIGURA 17-25</strong> que no solo se mueve hacia atrás un espacio; se mueve antes que todos los elementos que aún tienen <strong>order</strong> establecido a 0, que es un valor más alto que −1:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box5</span> </span><span class="token punctuation">{</span>
+    <span class="token property">order</span><span class="token punctuation">:</span> -<span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Los valores negativos se muestran antes que los elementos con el <strong>order</strong> predeterminado de 0.</p>
+<blockquote>
+<p>He usado valores simples de 1 y −1 en estos ejemplos, pero el<br>
+resultado sería el mismo si hubiera usado valores como 10008 o −649.<br>
+El orden va del valor más bajo al más alto, y los valores numéricos no<br>
+necesitan estar en orden secuencial.</p>
+</blockquote>
+<hr>
+<h3 id="flex-absoluto-versus-relativo">Flex Absoluto Versus Relativo</h3>
+<p>En la <strong>FIGURA 12-20</strong>, vimos cómo se asigna el espacio extra a los elementos basado en sus proporciones flex. Esto se llama <strong>flex relativo</strong>, y es cómo se maneja el espacio extra cuando el <strong>flex-basis</strong> se establece a cualquier tamaño que no sea cero (0), como un valor particular de <strong>width</strong>/<strong>height</strong> o <strong>auto</strong>.</p>
+<p>Sin embargo, si estableces el valor de <strong>flex-basis</strong> a 0, algo interesante sucede. Con una base de 0, los elementos se dimensionan proporcionalmente según sus proporciones flex, lo que se conoce como <strong>flex absoluto</strong>. Entonces, con <strong>flex-basis: 0%</strong>, un elemento con un valor <strong>flex-grow</strong> de 2 sería dos veces más ancho que cualquier elemento con un valor <strong>flex-grow</strong> de 1. Nuevamente, esto solo entra en acción cuando el <strong>flex-basis</strong> es 0.</p>
+<p>En la práctica se recomienda que siempre incluyas una unidad después del 0, como <strong>0px</strong> o el preferido <strong>0%</strong>.</p>
+<p>En este ejemplo de flex absoluto, a la primera caja se le da un valor <strong>flex-grow</strong> de 2, y a la cuarta caja tiene un valor <strong>flex-grow</strong> de 3 a través del atajo mencionado anteriormente <strong>flex: integer</strong>. En la <strong>FIGURA 17-22</strong>, puedes ver que los tamaños generales resultantes de las cajas están en proporción a los valores <strong>flex-grow</strong> porque el <strong>flex-basis</strong> se establece a 0:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector"><span class="token class">.box</span> </span><span class="token punctuation">{</span>
+    <span class="token comment">/* applied to all boxes */</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">0%</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token class">.box1</span> </span><span class="token punctuation">{</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">/* shortcut value for flex: 2 1 0% */</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token class">.box4</span> </span><span class="token punctuation">{</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">/* shortcut value for flex: 3 1 0% */</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h2 id="flexbox-para-diseño-de-página">FLEXBOX PARA DISEÑO DE PÁGINA</h2>
+<p>Ahora echemos un vistazo a cómo podemos usar <strong>order</strong> para algo más útil que mover pequeñas cajas en una línea. Aquí hay un documento simple con un encabezado, una sección principal que consiste en un <strong>article</strong> y dos elementos <strong>aside</strong>, y un <strong>footer</strong> (ver <strong>Nota</strong>):</p>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span><span class="token punctuation">&gt;</span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>main</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>article</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>Where It's At<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>article</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>aside</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>news<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>News<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>aside</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>aside</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>contact<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>Contact<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>aside</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>main</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span><span class="token punctuation">&gt;</span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>Aquí he hecho del elemento <strong>main</strong> un contenedor flex para que los elementos <strong>article</strong> y <strong>aside</strong> se alineen en una fila, creando tres columnas ). Establecí el factor <strong>flex</strong> para cada elemento, permitiéndoles crecer y encogerse, y establecí sus anchos con <strong>flex-basis</strong>. Finalmente, usé la propiedad <strong>order</strong> para especificar el orden en que me gustaría que aparezcan. Nota que la sección Contact ahora es la primera en la fila, aunque aparece última en el orden del código fuente. Y, como beneficio adicional, todas las columnas llenan la altura del contenedor principal a pesar de la cantidad de contenido en ellas porque <strong>stretch</strong> es el valor predeterminado para <strong>align-items</strong>:</p>
+<pre class=" language-css"><code class="prism  language-css"><span class="token selector">main </span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">article </span><span class="token punctuation">{</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">50%</span><span class="token punctuation">;</span>
+    <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token id">#news</span> </span><span class="token punctuation">{</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">25%</span><span class="token punctuation">;</span>
+    <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token id">#contact</span> </span><span class="token punctuation">{</span>
+    <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token number">1</span> <span class="token number">25%</span><span class="token punctuation">;</span>
+    <span class="token property">order</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<blockquote>
+<h3 id="nota-2">NOTA</h3>
+<p><em>Aunque es posible crear un diseño de página completo con Flexbox, la tarea se maneja más apropiadamente con Grid Layout, . Sin embargo,<br>
+como Flexbox tiene mejor soporte de navegador que Grid Layout, puede<br>
+ser una alternativa adecuada. Flexbox es mejor para alinear<br>
+componentes individuales en la página como barras de navegación, una<br>
+serie de “tarjetas” de producto, o cualquier cosa que quieras poner en<br>
+una línea.</em></p>
+</blockquote>
+<h2 id="más-recursos-de-flexbox">MÁS RECURSOS DE FLEXBOX</h2>
+<p>Has aprendido los detalles de Flexbox en este capítulo, pero nunca está de más obtener perspectivas adicionales y probar algunos tutoriales prácticos. A continuación hay algunos de los sitios que he encontrado útiles o entretenidos. Ten en cuenta que si haces tu propia búsqueda web, deberías limitar tus hallazgos a publicaciones de 2016 en adelante, o puedes encontrarte con consejos desactualizados basados en versiones anteriores de la especificación.</p>
+<p><strong>CSS Flexible Box Layout Module Level 1</strong> (<a href="http://w3.org/TR/css-flexbox/">w3.org/TR/css-flexbox/</a>)<br>
+La fuente definitiva para las propiedades de Flexbox es la especificación de Flexbox en sí.</p>
+<p><strong>CSS Flexbox Layout Guide</strong> (<a href="http://css-tricks.com/a-guide-to-flexbox/">css-tricks.com/a-guide-to-flexbox/</a>)<br>
+Este resumen de características de Flexbox por Chris Coyier es una de las referencias de Flexbox más populares que existen. Algunos desarrolladores lo mantienen abierto en un navegador cuando hacen trabajo con Flexbox.</p>
+<p><strong>MDN Web Docs Flexbox Guides</strong> (<a href="http://oreil.ly/WHVhe">oreil.ly/WHVhe</a>)<br>
+Una vez más, MDN Web Docs es una gran fuente para descripciones completas y fáciles de entender de las características de Flexbox. Ver también la referencia “CSS Flexible Box Layout” en <a href="http://oreil.ly/a5Qx8t">oreil.ly/a5Qx8t</a>.</p>
+<p><strong>Flexbox Froggy</strong> (<a href="http://flexboxfroggy.com">flexboxfroggy.com</a>)<br>
+No te pierdas este juego en línea para aprender Flexbox ayudando a ranas coloridas a regresar a sus nenúfares.</p>
+<p><strong>What the Flexbox?!</strong> (<a href="http://flexbox.io">flexbox.io</a>)<br>
+Wes Bos hace un gran trabajo guiándote a través de las propiedades de Flexbox así como algunos proyectos de código en esta serie gratuita de videos de 20 partes.</p>
+<p><strong>Flexbox Playground</strong> (<a href="http://oreil.ly/YhPJO">oreil.ly/YhPJO</a>)<br>
+Como dice el nombre, esta página de Gabi te permite jugar con todas las propiedades y valores de Flexbox y ver los resultados instantáneamente. Es una buena manera de familiarizarse con lo que Flexbox puede hacer.</p>
+<hr>
+<h3 id="diseño-multicolumna">Diseño Multicolumna</h3>
+<p>Otra herramienta de diseño CSS que podrías querer probar es el Diseño Multicolumna. El Módulo de Diseño Multicolumna CSS Nivel 1 (<a href="http://w3.org/TR/css-multicol-1">w3.org/TR/css-multicol-1</a>) proporciona herramientas para verter contenido de texto en varias columnas, como podrías ver en un periódico   Está diseñado para ser flexible, permitiendo que los anchos y número de columnas se ajusten al espacio disponible automáticamente.</p>
+<p>Puedes leer más sobre esta técnica en mi artículo “Multicolumn Layout,” disponible en <a href="http://learningwebdesign.com/articles/">learningwebdesign.com/articles/</a>.</p>
+<blockquote>
+<p>Eso concluye nuestro recorrido por las propiedades de Flexbox.</p>
+</blockquote>
+</div>
+</body>
+
+</html>
