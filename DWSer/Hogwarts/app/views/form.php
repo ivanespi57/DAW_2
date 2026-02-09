@@ -8,7 +8,7 @@ $errores = $_SESSION['errores'] ?? [];
 $varita  = $datos['varita'] ?? [];
 $asigna  = $datos['asigna'] ?? [];
 
-// Inicializar token CSRF
+// Inicializar token
 if (!isset($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(random_bytes(24));
 }
@@ -17,13 +17,13 @@ if (!isset($_SESSION['token'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $accion = $_POST['accion'] ?? '';
 
-    // LIMPIAR
+    // Limpiar
     if ($accion === 'eliminar') {
         unset($_SESSION['datos_form'], $_SESSION['errores']);
         $datos = $errores = $varita = $asigna = [];
     }
 
-    // VALIDAR
+    // Validar
     if ($accion === 'validar') {
         $errores = validarFormulario($_POST);
         $_SESSION['errores'] = $errores;
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $asigna = $datos['asigna'] ?? [];
     }
 
-    // ENVIAR
+    // Enviar
     if ($accion === 'enviar') {
         $errores = validarFormulario($_POST);
         $_SESSION['errores'] = $errores;
@@ -90,11 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <p>Varita:</p>
     <?php 
-    $opcionesVarita = [
-        'Roble con núcleo de fénix',
-        'Sauce con núcleo de unicornio',
-        'Acebo con núcleo de dragón'
-    ];
+    $opcionesVarita = ['Roble con núcleo de fénix', 'Sauce con núcleo de unicornio', 'Acebo con núcleo de dragón'];
     foreach($opcionesVarita as $v): ?>
         <label>
             <input type="checkbox" name="varita[]" value="<?= $v ?>" <?= in_array($v, $varita) ? 'checked' : '' ?>> <?= $v ?>
