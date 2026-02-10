@@ -16,6 +16,7 @@ let articulosCarrito = [];
 let productosDB = [];
 let categoriaActual = 'todos'; // Controla quÃ© estamos viendo
 
+
 // Inicio
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Recuperar LocalStorage (Actividad 5.9)

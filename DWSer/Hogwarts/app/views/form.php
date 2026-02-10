@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <h1>Iván Espí Asins</h1>
 
-<!-- Mostrar errores -->
 <?php if (!empty($errores)): ?>
     <ul style="color:red;">
         <?php foreach($errores as $error): ?>
